@@ -21,6 +21,7 @@
 		65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */; };
 		65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F12BB2306700521468 /* HTTPClient.swift */; };
 		65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */; };
+		65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeNodeLoader.swift; sourceTree = "<group>"; };
 		65B1C7F12BB2306700521468 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeMapper.swift; sourceTree = "<group>"; };
+		65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				65B1C7F12BB2306700521468 /* HTTPClient.swift */,
+				65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
 				65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */,
 				65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */,
+				65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
