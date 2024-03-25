@@ -15,6 +15,13 @@ struct RemoteTreeNode: Codable, Identifiable {
     let label: String
     var children: [RemoteTreeNode]? // Optional children
 
+    // Custom initializer to set depth and parentId recursively
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        id = try container.decodeIfPresent(String.self, forKey: .id) ?? UUID().uuidString
+//        label = try container.decode(String.self, forKey: .label)
+//        children = try container.decodeIfPresent([RemoteTreeNode].self, forKey: .children)
+//    }
    
 }
 public protocol HTTPClient {
@@ -85,7 +92,7 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         let samples = [199, 201, 300, 400, 500]
 
         for code in samples {
-            let json = makeItemsJSON([])
+            let json = convertNodeHierarchyToJSON(nodes: [])
             let httpURLResponse = HTTPURLResponse(url: anyURL(), statusCode: code, httpVersion: nil, headerFields: nil)!
 
             let (sut, _) = makeSUT(result: (json, httpURLResponse))
@@ -96,6 +103,21 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
             } catch let error as RemoteTreeNodeLoader.Error {
                 XCTAssertEqual(error, .invalidData)
             }
+        }
+    }
+    
+    func test_load_deliversSuccessWithNoItemsOn200HTTPResponseWithEmptyJSONList() async throws {
+        
+        let emptyListJSON = convertNodeHierarchyToJSON(nodes: [])
+        let httpURLResponse = HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!
+
+        let (sut, _) = makeSUT(result: (emptyListJSON, httpURLResponse))
+
+        do {
+            let result = try await sut.load()
+            XCTAssertEqual(result, [])
+        } catch let error as RemoteTreeNodeLoader.Error {
+            XCTFail("Expected result \([]) got \(error) instead")
         }
     }
     
@@ -141,10 +163,6 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         return URL(string: "https://a-url.com")!
     }
     
-    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = [items]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
     
 
     // Method to build the node hierarchy
@@ -170,18 +188,17 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         return [imgly, nineElements]
     }
     
-    func convertNodeHierarchyToJSON() {
-        do {
+    func convertNodeHierarchyToJSON(nodes: [RemoteTreeNode]) -> Data {
+        
             let nodes = buildNodeHierarchy()
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted // For pretty printing
-            let jsonData = try encoder.encode(nodes)
+            let jsonData = try! encoder.encode(nodes)
             
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 print(jsonString)
             }
-        } catch {
-            print("Error encoding JSON: \(error)")
-        }
+            return jsonData
+         
     }
 }
