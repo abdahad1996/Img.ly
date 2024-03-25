@@ -160,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				65B1C7EA2BB1E8D700521468 /* Helpers */,
-				65B1C7E72BB1DED100521468 /* Api */,
 			);
 			path = CoreTests;
 			sourceTree = "<group>";
@@ -203,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				65B1C7EB2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift */,
+				65B1C7F72BB232D400521468 /* Tree */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -223,6 +223,14 @@
 				65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */,
 			);
 			path = Infra;
+			sourceTree = "<group>";
+		};
+		65B1C7F72BB232D400521468 /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C7E72BB1DED100521468 /* Api */,
+			);
+			path = Tree;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
