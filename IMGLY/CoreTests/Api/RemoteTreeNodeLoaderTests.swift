@@ -30,6 +30,8 @@ class RemoteTreeNodeLoader:TreeNodeLoader {
     }
     
     func load() async throws -> [TreeNode] {
+        
+       try await client.get(from: url)
         throw Error.connectivity
     }
     
@@ -42,6 +44,16 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         let (_, client) = makeSUT()
 
         XCTAssertTrue(client.requests.isEmpty)
+    }
+    
+    func test_loadTwice_requestsDataFromURLTwice() async {
+        let url = URL(string: "https://a-given-url.com")!
+        let (sut, client) = makeSUT(url: url)
+
+        _ = try? await sut.load()
+        _ = try? await sut.load()
+
+        XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
     // MARK: - Helpers
