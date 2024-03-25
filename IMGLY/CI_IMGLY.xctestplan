@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "B4229AB7-95F2-499F-B647-5709DB875FFF",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:IMGLY.xcodeproj",
+      "identifier" : "65B1C7922BB1D38E00521468",
+      "name" : "IMGLY"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:IMGLY.xcodeproj",
+        "identifier" : "65B1C7CF2BB1DA1500521468",
+        "name" : "CoreTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:IMGLY.xcodeproj",
+        "identifier" : "65B1C7A22BB1D39100521468",
+        "name" : "IMGLYTests"
+      }
+    }
+  ],
+  "version" : 1
+}
