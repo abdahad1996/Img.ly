@@ -16,6 +16,7 @@
 		65B1C7D62BB1DA1500521468 /* CoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7D52BB1DA1500521468 /* CoreTests.swift */; };
 		65B1C7D72BB1DA1500521468 /* Core.h in Headers */ = {isa = PBXBuildFile; fileRef = 65B1C7CB2BB1DA1500521468 /* Core.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7E12BB1DD5F00521468 /* TreeNode.swift */; };
+		65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7E32BB1DE2700521468 /* TreeNodeLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		65B1C7D52BB1DA1500521468 /* CoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTests.swift; sourceTree = "<group>"; };
 		65B1C7DE2BB1DBB800521468 /* CI_IMGLY.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_IMGLY.xctestplan; sourceTree = "<group>"; };
 		65B1C7E12BB1DD5F00521468 /* TreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNode.swift; sourceTree = "<group>"; };
+		65B1C7E32BB1DE2700521468 /* TreeNodeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNodeLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				65B1C7E12BB1DD5F00521468 /* TreeNode.swift */,
+				65B1C7E32BB1DE2700521468 /* TreeNodeLoader.swift */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
