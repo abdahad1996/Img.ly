@@ -10,6 +10,13 @@ import XCTest
 import Core
 
 
+struct RemoteTreeNode: Codable, Identifiable {
+    let id: String
+    let label: String
+    var children: [RemoteTreeNode]? // Optional children
+
+   
+}
 public protocol HTTPClient {
     func get(from url: URL) async throws -> (Data, HTTPURLResponse)
 }
@@ -30,13 +37,17 @@ class RemoteTreeNodeLoader:TreeNodeLoader {
     }
     
     func load() async throws -> [TreeNode] {
-        do {
-            try await client.get(from: url)
-        }catch {
+        guard let (data,response) =  try? await client.get(from: url) else{
             throw Error.connectivity
         }
+       guard response.statusCode == 200, let _ = try? JSONDecoder().decode([RemoteTreeNode].self, from: data) else {
+                throw RemoteTreeNodeLoader.Error.invalidData
+            }
+//            return []
+            return []
+        
        
-        throw Error.connectivity
+      
     }
     
     
@@ -67,6 +78,24 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
             XCTFail("Expected result \(RemoteTreeNodeLoader.Error.connectivity) got \(result) instead")
         } catch let error as RemoteTreeNodeLoader.Error {
             XCTAssertEqual(error, .connectivity)
+        }
+    }
+    
+    func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() async throws {
+        let samples = [199, 201, 300, 400, 500]
+
+        for code in samples {
+            let json = makeItemsJSON([])
+            let httpURLResponse = HTTPURLResponse(url: anyURL(), statusCode: code, httpVersion: nil, headerFields: nil)!
+
+            let (sut, _) = makeSUT(result: (json, httpURLResponse))
+
+            do {
+                let result = try await sut.load()
+                XCTFail("Expected result \(RemoteTreeNodeLoader.Error.invalidData) got \(result) instead")
+            } catch let error as RemoteTreeNodeLoader.Error {
+                XCTAssertEqual(error, .invalidData)
+            }
         }
     }
     
@@ -103,6 +132,56 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
             return result
         }
     }
+    
+    private func anyValidResponse() -> (Data, HTTPURLResponse) {
+        (Data(), HTTPURLResponse())
+    }
+
+    private func anyURL() -> URL {
+        return URL(string: "https://a-url.com")!
+    }
+    
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+        let json = [items]
+        return try! JSONSerialization.data(withJSONObject: json)
+    }
+    
+
+    // Method to build the node hierarchy
+    func buildNodeHierarchy() -> [RemoteTreeNode] {
+        let entry1 = RemoteTreeNode(id: "imgly.A.1", label: "Entry 1")
+        let entry2 = RemoteTreeNode(id: "imgly.A.2", label: "Entry 2")
+        let entry3 = RemoteTreeNode(id: "imgly.A.3", label: "Entry 3")
+
+        let subEntry1 = RemoteTreeNode(id: "imgly.B.3.1", label: "Sub-Entry 1")
+        let entry3Node = RemoteTreeNode(id: "", label: "Entry 3", children: [subEntry1])
+
+        let workspaceA = RemoteTreeNode(id: "", label: "Workspace A", children: [entry1, entry2, entry3])
+        let workspaceB = RemoteTreeNode(id: "", label: "Workspace B", children: [entry1, entry2, entry3Node])
+
+        let imgly = RemoteTreeNode(id: "", label: "img.ly", children: [workspaceA, workspaceB])
+
+        let entry1_9e = RemoteTreeNode(id: "9e.A.1", label: "Entry 1")
+        let entry2_9e = RemoteTreeNode(id: "9e.A.2", label: "Entry 2")
+        let workspaceA_9e = RemoteTreeNode(id: "", label: "Workspace A", children: [entry1_9e, entry2_9e])
+
+        let nineElements = RemoteTreeNode(id: "", label: "9elements", children: [workspaceA_9e])
+
+        return [imgly, nineElements]
+    }
+    
+    func convertNodeHierarchyToJSON() {
+        do {
+            let nodes = buildNodeHierarchy()
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted // For pretty printing
+            let jsonData = try encoder.encode(nodes)
+            
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
+            }
+        } catch {
+            print("Error encoding JSON: \(error)")
+        }
+    }
 }
-
-
