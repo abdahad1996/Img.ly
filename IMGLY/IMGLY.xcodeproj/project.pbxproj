@@ -26,6 +26,8 @@
 		65B1C7FC2BB2338600521468 /* LeafNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7FA2BB2338600521468 /* LeafNode.swift */; };
 		65B1C8012BB2345800521468 /* RemoteLeafNodeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */; };
 		65B1C8022BB2345800521468 /* RemoteLeafNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */; };
+		65B1C8052BB234D600521468 /* TreeNodeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8042BB234D600521468 /* TreeNodeEndPoint.swift */; };
+		65B1C8072BB2353C00521468 /* LeafNodeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8062BB2353B00521468 /* LeafNodeEndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		65B1C7FA2BB2338600521468 /* LeafNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNode.swift; sourceTree = "<group>"; };
 		65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLeafNodeMapper.swift; sourceTree = "<group>"; };
 		65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLeafNodeLoader.swift; sourceTree = "<group>"; };
+		65B1C8042BB234D600521468 /* TreeNodeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNodeEndPoint.swift; sourceTree = "<group>"; };
+		65B1C8062BB2353B00521468 /* LeafNodeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafNodeEndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,7 @@
 			children = (
 				65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */,
 				65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */,
+				65B1C8042BB234D600521468 /* TreeNodeEndPoint.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 			children = (
 				65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */,
 				65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */,
+				65B1C8062BB2353B00521468 /* LeafNodeEndPoint.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B1C8072BB2353C00521468 /* LeafNodeEndPoint.swift in Sources */,
 				65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */,
 				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
 				65B1C8022BB2345800521468 /* RemoteLeafNodeLoader.swift in Sources */,
@@ -473,6 +480,7 @@
 				65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
 				65B1C7FC2BB2338600521468 /* LeafNode.swift in Sources */,
+				65B1C8052BB234D600521468 /* TreeNodeEndPoint.swift in Sources */,
 				65B1C8012BB2345800521468 /* RemoteLeafNodeMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

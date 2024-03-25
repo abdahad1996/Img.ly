@@ -23,6 +23,7 @@ public class RemoteTreeNodeLoader:TreeNodeLoader {
     }
     
     public func load() async throws -> [TreeNode] {
+        let url = TreeNodeEndpoint.get.url(baseURL: url)
         let (data, response) = try await self.client.get(from: url)
         return try RemoteTreeMapper.mapToTreeNodes(from: data, response: response)
     }

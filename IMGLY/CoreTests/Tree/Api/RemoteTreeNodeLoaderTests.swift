@@ -17,6 +17,15 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         XCTAssertTrue(client.requests.isEmpty)
     }
     
+    func test_load_checksUrlConstruction() async {
+        let url = URL(string: "https://ubique.img.ly/frontend-tha")!
+        let (sut, client) = makeSUT(url: url)
+
+        _ = try? await sut.load()
+
+        XCTAssertEqual(client.requestedURLs[0].absoluteString, "https://ubique.img.ly/frontend-tha/data.json")
+    }
+    
     func test_loadTwice_requestsDataFromURLTwice() async {
         let url = URL(string: "https://a-given-url.com")!
         let (sut, client) = makeSUT(url: url)
