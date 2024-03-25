@@ -30,8 +30,12 @@ class RemoteTreeNodeLoader:TreeNodeLoader {
     }
     
     func load() async throws -> [TreeNode] {
-        
-       try await client.get(from: url)
+        do {
+            try await client.get(from: url)
+        }catch {
+            throw Error.connectivity
+        }
+       
         throw Error.connectivity
     }
     
@@ -54,6 +58,16 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         _ = try? await sut.load()
 
         XCTAssertEqual(client.requestedURLs, [url, url])
+    }
+    
+    func test_load_deliversConnectivityErrorOnClientError() async throws {
+        let (sut, _) = makeSUT(error: .connectivity)
+        do {
+            let result = try await sut.load()
+            XCTFail("Expected result \(RemoteTreeNodeLoader.Error.connectivity) got \(result) instead")
+        } catch let error as RemoteTreeNodeLoader.Error {
+            XCTAssertEqual(error, .connectivity)
+        }
     }
     
     // MARK: - Helpers
