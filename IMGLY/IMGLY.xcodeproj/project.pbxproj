@@ -18,6 +18,9 @@
 		65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7E32BB1DE2700521468 /* TreeNodeLoader.swift */; };
 		65B1C7E92BB1DEF100521468 /* RemoteTreeNodeLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7E82BB1DEF100521468 /* RemoteTreeNodeLoaderTests.swift */; };
 		65B1C7EC2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7EB2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift */; };
+		65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */; };
+		65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F12BB2306700521468 /* HTTPClient.swift */; };
+		65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		65B1C7E32BB1DE2700521468 /* TreeNodeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeNodeLoader.swift; sourceTree = "<group>"; };
 		65B1C7E82BB1DEF100521468 /* RemoteTreeNodeLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeNodeLoaderTests.swift; sourceTree = "<group>"; };
 		65B1C7EB2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeNodeLoader.swift; sourceTree = "<group>"; };
+		65B1C7F12BB2306700521468 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTreeMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +147,7 @@
 		65B1C7CA2BB1DA1500521468 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C7F02BB2304700521468 /* Infra */,
 				65B1C7E62BB1DE9000521468 /* Tree */,
 				65B1C7CB2BB1DA1500521468 /* Core.h */,
 			);
@@ -176,6 +183,7 @@
 		65B1C7E62BB1DE9000521468 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C7ED2BB22FDC00521468 /* Api */,
 				65B1C7DF2BB1DCF700521468 /* Domain */,
 			);
 			path = Tree;
@@ -195,6 +203,23 @@
 				65B1C7EB2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		65B1C7ED2BB22FDC00521468 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C7EE2BB2300D00521468 /* RemoteTreeNodeLoader.swift */,
+				65B1C7F32BB2309F00521468 /* RemoteTreeMapper.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		65B1C7F02BB2304700521468 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C7F12BB2306700521468 /* HTTPClient.swift */,
+			);
+			path = Infra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,7 +409,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */,
 				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
+				65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */,
+				65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
