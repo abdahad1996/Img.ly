@@ -241,10 +241,18 @@
 		65B1C7F82BB2334D00521468 /* Leaf */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C7FD2BB233E800521468 /* Domain */,
+			);
+			path = Leaf;
+			sourceTree = "<group>";
+		};
+		65B1C7FD2BB233E800521468 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
 				65B1C7FA2BB2338600521468 /* LeafNode.swift */,
 				65B1C7F92BB2338600521468 /* LeafNodeLoader.swift */,
 			);
-			path = Leaf;
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
