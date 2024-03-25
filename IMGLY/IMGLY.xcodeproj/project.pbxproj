@@ -24,6 +24,8 @@
 		65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */; };
 		65B1C7FB2BB2338600521468 /* LeafNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7F92BB2338600521468 /* LeafNodeLoader.swift */; };
 		65B1C7FC2BB2338600521468 /* LeafNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7FA2BB2338600521468 /* LeafNode.swift */; };
+		65B1C8012BB2345800521468 /* RemoteLeafNodeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */; };
+		65B1C8022BB2345800521468 /* RemoteLeafNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHttpAdapter.swift; sourceTree = "<group>"; };
 		65B1C7F92BB2338600521468 /* LeafNodeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNodeLoader.swift; sourceTree = "<group>"; };
 		65B1C7FA2BB2338600521468 /* LeafNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNode.swift; sourceTree = "<group>"; };
+		65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLeafNodeMapper.swift; sourceTree = "<group>"; };
+		65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLeafNodeLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,7 @@
 		65B1C7D42BB1DA1500521468 /* CoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8032BB2345F00521468 /* Leaf */,
 				65B1C7EA2BB1E8D700521468 /* Helpers */,
 				65B1C7F72BB232D400521468 /* Tree */,
 			);
@@ -241,6 +246,7 @@
 		65B1C7F82BB2334D00521468 /* Leaf */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C7FE2BB2341100521468 /* Api */,
 				65B1C7FD2BB233E800521468 /* Domain */,
 			);
 			path = Leaf;
@@ -253,6 +259,22 @@
 				65B1C7F92BB2338600521468 /* LeafNodeLoader.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		65B1C7FE2BB2341100521468 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8002BB2345800521468 /* RemoteLeafNodeLoader.swift */,
+				65B1C7FF2BB2345800521468 /* RemoteLeafNodeMapper.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		65B1C8032BB2345F00521468 /* Leaf */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Leaf;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,12 +466,14 @@
 			files = (
 				65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */,
 				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
+				65B1C8022BB2345800521468 /* RemoteLeafNodeLoader.swift in Sources */,
 				65B1C7FB2BB2338600521468 /* LeafNodeLoader.swift in Sources */,
 				65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */,
 				65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */,
 				65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
 				65B1C7FC2BB2338600521468 /* LeafNode.swift in Sources */,
+				65B1C8012BB2345800521468 /* RemoteLeafNodeMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
