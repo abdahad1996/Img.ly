@@ -24,7 +24,9 @@ public class RemoteTreeNodeLoader:TreeNodeLoader {
     
     public func load() async throws -> [TreeNode] {
         let url = TreeNodeEndpoint.get.url(baseURL: url)
-        let (data, response) = try await self.client.get(from: url)
+        guard let (data, response) = try? await self.client.get(from: url) else{
+            throw Error.connectivity
+        }
         return try RemoteTreeMapper.mapToTreeNodes(from: data, response: response)
     }
     

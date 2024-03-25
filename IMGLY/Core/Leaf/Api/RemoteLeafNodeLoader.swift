@@ -23,7 +23,9 @@ public final class RemoteLeafNodeLoader: LeafNodeLoader {
 
 	public func load(id: String) async throws -> LeafNode {
         let url = LeafNodeEndpoint.get(id).url(baseURL: url)
-		let (data, response) = try await self.client.get(from: url)
+        guard let (data, response) = try? await self.client.get(from: url) else{
+            throw Error.connectivity
+        }
 		return try RemoteLeafMapper.mapToLeafNode(from: data, response: response)
 	}
 }

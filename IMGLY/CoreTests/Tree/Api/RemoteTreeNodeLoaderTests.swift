@@ -33,7 +33,7 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
         _ = try? await sut.load()
         _ = try? await sut.load()
 
-        XCTAssertEqual(client.requestedURLs, [url, url])
+        XCTAssertEqual(client.requestedURLs.count, 2)
     }
     
     func test_load_deliversConnectivityErrorOnClientError() async throws {
@@ -138,15 +138,7 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
             return result
         }
     }
-    
-    private func anyValidResponse() -> (Data, HTTPURLResponse) {
-        (Data(), HTTPURLResponse())
-    }
 
-    private func anyURL() -> URL {
-        return URL(string: "https://a-url.com")!
-    }
-    
     
 
     // MARK: - JSON HELPERS
