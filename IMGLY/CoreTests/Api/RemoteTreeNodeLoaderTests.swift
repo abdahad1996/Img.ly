@@ -10,7 +10,7 @@ import XCTest
 import Core
 
 
-struct RemoteTreeNode: Codable, Identifiable {
+struct RemoteTreeNode: Codable, Identifiable,Equatable {
     let id: String
     let label: String
     var children: [RemoteTreeNode]? // Optional children
@@ -28,7 +28,7 @@ public protocol HTTPClient {
     func get(from url: URL) async throws -> (Data, HTTPURLResponse)
 }
 
-class RemoteTreeNodeLoader:TreeNodeLoader {
+class RemoteTreeNodeLoader {
     
     let url:URL
     let client:HTTPClient
@@ -43,15 +43,14 @@ class RemoteTreeNodeLoader:TreeNodeLoader {
         case invalidData
     }
     
-    func load() async throws -> [TreeNode] {
+    func load() async throws -> [RemoteTreeNode] {
         guard let (data,response) =  try? await client.get(from: url) else{
             throw Error.connectivity
         }
-       guard response.statusCode == 200, let _ = try? JSONDecoder().decode([RemoteTreeNode].self, from: data) else {
+       guard response.statusCode == 200, let remoteTreeNodes = try? JSONDecoder().decode([RemoteTreeNode].self, from: data) else {
                 throw RemoteTreeNodeLoader.Error.invalidData
             }
-//            return []
-            return []
+            return remoteTreeNodes
         
        
       
@@ -120,6 +119,25 @@ class RemoteTreeNodeLoaderTests:XCTestCase{
             XCTFail("Expected result \([]) got \(error) instead")
         }
     }
+    
+    func test_load_deliversSuccessWithItemsOn200HTTPResponseWithJSONItems() async throws {
+        
+        let items = buildNodeHierarchy()
+        let json = convertNodeHierarchyToJSON(nodes: items)
+        let httpURLResponse = HTTPURLResponse(url: anyURL(), statusCode: 200, httpVersion: nil, headerFields: nil)!
+
+        let (sut, _) = makeSUT(result: (json, httpURLResponse))
+
+        
+
+        do {
+            let result = try await sut.load()
+            XCTAssertEqual(result, items)
+        } catch let error as RemoteTreeNodeLoader.Error {
+            XCTFail("Expected result \(items) got \(error) instead")
+        }
+    }
+    
     
     // MARK: - Helpers
 
