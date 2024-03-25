@@ -38,7 +38,11 @@ class RemoteTreeNodeLoader:TreeNodeLoader {
 class RemoteTreeNodeLoaderTests:XCTestCase{
     
     
-    
+    func test_init_doesNotRequestDataFromURL() {
+        let (_, client) = makeSUT()
+
+        XCTAssertTrue(client.requests.isEmpty)
+    }
     
     // MARK: - Helpers
 
