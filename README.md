@@ -163,8 +163,11 @@ GET /entries/${id}.json
 ---
 
 ## DesignTheme
-i used
+I used the concept of Atomic design to create tokens for colors, fonts, and miscellaneous items together with polymorphism I was able to create different implementations of the combined token and I only had to change the dependency to change the theme of the app.
+
+<img width="583" alt="Screenshot 2024-03-26 at 3 20 00 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/c4680c56-1b1a-495e-abf9-497001feb5a0">
 
 
 ## Extra
+
 
