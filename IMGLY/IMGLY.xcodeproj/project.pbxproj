@@ -51,6 +51,7 @@
 		65B1C83D2BB2494500521468 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65B1C7C92BB1DA1400521468 /* Core.framework */; };
 		65B1C83E2BB2494500521468 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 65B1C7C92BB1DA1400521468 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		65B1C8432BB24A5000521468 /* StubbedResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8422BB24A5000521468 /* StubbedResponses.swift */; };
+		65B1C8472BB2508D00521468 /* TreeNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8462BB2508D00521468 /* TreeNodeFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		65B1C8342BB2492800521468 /* TreeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeView.swift; sourceTree = "<group>"; };
 		65B1C8352BB2492800521468 /* TreeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeViewModel.swift; sourceTree = "<group>"; };
 		65B1C8422BB24A5000521468 /* StubbedResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubbedResponses.swift; sourceTree = "<group>"; };
+		65B1C8462BB2508D00521468 /* TreeNodeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeNodeFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,8 +204,8 @@
 		65B1C7952BB1D38E00521468 /* IMGLY */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8442BB24FAF00521468 /* Main */,
 				65B1C82B2BB2450300521468 /* Info.plist */,
-				65B1C8152BB243F800521468 /* Font */,
 				65B1C80E2BB2434B00521468 /* DesignSystem */,
 				65B1C80D2BB242DC00521468 /* UI Module */,
 				65B1C7962BB1D38E00521468 /* IMGLYApp.swift */,
@@ -378,6 +380,7 @@
 		65B1C80E2BB2434B00521468 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8152BB243F800521468 /* Font */,
 				65B1C8202BB2440E00521468 /* Colors */,
 				65B1C8212BB2440E00521468 /* DesignLibrary.swift */,
 				65B1C8242BB2440E00521468 /* Font */,
@@ -396,7 +399,8 @@
 				65B1C8132BB243F800521468 /* SpaceGrotesk-Bold.ttf */,
 				65B1C8142BB243F800521468 /* SpaceGrotesk-Regular.ttf */,
 			);
-			path = Font;
+			name = Font;
+			path = ../Font;
 			sourceTree = "<group>";
 		};
 		65B1C81D2BB2440E00521468 /* Miscellaneous */ = {
@@ -466,6 +470,22 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		65B1C8442BB24FAF00521468 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8452BB2507F00521468 /* Factory */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		65B1C8452BB2507F00521468 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8462BB2508D00521468 /* TreeNodeFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -659,6 +679,7 @@
 				65B1C7972BB1D38E00521468 /* IMGLYApp.swift in Sources */,
 				65B1C82A2BB2440E00521468 /* FontTokens.swift in Sources */,
 				65B1C8252BB2440E00521468 /* MiscellaneousTokens.swift in Sources */,
+				65B1C8472BB2508D00521468 /* TreeNodeFactory.swift in Sources */,
 				65B1C83A2BB2492800521468 /* TreeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
