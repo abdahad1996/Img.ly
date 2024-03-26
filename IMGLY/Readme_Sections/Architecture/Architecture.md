@@ -2,105 +2,142 @@
 
 ### Overview
 
-For this project, I organized the codebase into `Vertical Slices or Vertical features` , inside each Vertical Slice I am using `horizontal slicing` to break down the slice into layers, while respecting the dependency rule:
+For this project, I organized the codebase layers or Horizontal Slicing in which Domain, Api, and Infrastructure Layers are encapsulated in a framework Core but separated internally using Dependency Inversion. Since Everything is Decoupled it's easy to switch between different architectures and implementations.
 
 > ❗️ High-level modules should not depend on lower-level modules and lower-level modules should only communicate and know about the next higher-level layer.
 
-In my opinion, it's the best approach for this kind of project since `vertical slicing` is  suitable for larger projects with feature teams and keeping in view of future i thought this was the best way to go forward. I didn't create framework or packages but kept it simple using folder separation but i kept everything decoupled so it won't be hard to switch to packages or framework in the future.
+The following diagram shows a high-level structure of the whole app
 
-The following diagram shows a high level structure of the whole app
+<img width="696" alt="Screenshot 2024-03-26 at 2 17 10 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/76fd094d-76e9-4e13-b9cf-be4811655fda">
 
-<img width="918" alt="Screenshot 2024-01-16 at 13 02 04" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/2edaecc7-8a1e-4577-8059-ccdf73466e33">
+A more detailed look into Core would show you 
 
+<img width="864" alt="Screenshot 2024-03-26 at 2 00 15 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/71dbf9f4-4695-4b9c-85ca-ec775f89f0d3">
 
+I follow the following subset of UML introduced to me by https://academy.essentialdeveloper.com/.
 
-In the diagram you see 2 vertical sliced features
+<img width="338" alt="Screenshot 2024-03-26 at 2 27 52 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/2c72760b-1354-407a-861d-5675754ebf0f">
 
-The Transaction Detail feature only has a UI layer and a presentation layer since it's dependent on the Transaction Module due to Transaction domain model but it is made in a way that if tomorrow a need arises for Transaction Detail feature to have it's own domain and own abstractions along with its interactors and controllers so it's scalable. but for now simply passing in the Transaction domain model to it is okay.
-
-I'll talk a bit deeply about the Transaction feature as it is the one doing the heavy lifting. For better understanding i separated the Transaction Feature 
-
-<img width="328" alt="Screenshot 2024-01-16 at 13 00 32" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/3421f0de-30df-48c2-8f6a-6238e393072d">
-
-The following diagram is a provides a top-level view of Transaction Feature with all horizontal modules.
+let's focus on how Tree View consumes Core to Display the UI.
 1. [Domain](#domain)
-2. [Remote Transaction Loader](#Api)
+2. [Remote TreeNode Loader](#Api)
 4. [API Infra](#api-infra)
 7. [Presentation](#presentation)
 8. [UI](#ui)
 9. [Main](#main) (Composition Root)
      
-### Domain
+### Domain (Tree Node)
 
 The domain represents the innermost layer in the architecture (no dependencies with other layers). It contains only models and abstractions for:
-- fetching data by the [Remote Transaction Loader](#networking)
+- fetching data by the [Remote TreeNode Loader](#networking)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
 
-#### 1. Transaction Feature
+#### 1. TreeNode Feature
 
 ```swift
-public struct TransactionItem:Hashable{
-    public let partnerDisplayName: String
-    public let bookingDate: Date
-    public let description: String?
-    public let amount: Int
-    public let currency: String
-    public let category:Int
-    
-   public init(partnerDisplayName: String, bookingDate: Date, description: String?, amount: Int, currency: String,category:Int) {
-        self.partnerDisplayName = partnerDisplayName
-        self.bookingDate = bookingDate
-        self.description = description
-        self.amount = amount
-        self.currency = currency
-        self.category = category
+public struct TreeNode: Identifiable, Equatable {
+    public let id: String
+    public let label: String
+    public var children: [TreeNode]?
+    public var parentId: String?
+    public var level: Int = 0
+
+    public init(id: String, label: String, children: [TreeNode]? = nil, parentId: String? = nil, level: Int = 0) {
+        self.id = id
+        self.label = label
+        self.children = children
+        self.parentId = parentId
+        self.level = level
     }
 }
 ```
 
 ```swift
-public protocol TransactionLoader {
-    typealias Result = Swift.Result<[TransactionItem], Error>
-    
-    func load() async throws -> [TransactionItem]
-    func load(completion: @escaping (Result) -> Void)
+public protocol TreeNodeLoader {
+    func load() async throws -> [TreeNode]
 }
 ```
 
 ### #Api
-The following diagram showcases the Api layer, which communicates with my backend app. For a better understanding, 
-#### 1. RemoteTransactionLoader
+The following diagram showcases the API layer, which communicates with my backend app. For a better understanding, 
+#### 1. RemoteTreeNodeLoader
 
-this class implements the transaction loader from the domain so we invert the depedency and instead of our domain depending on the api our api depends on domain and our domain can be independent of any dependency.
+this class implements the transaction loader from the domain so we invert the dependency and instead of our domain depending on the API our API depends on the domain and our domain can be independent of any dependency.
 
 ```swift
-public class RemoteTransactionLoader: TransactionLoader {
+public class RemoteTreeNodeLoader:TreeNodeLoader {
     
-    public typealias Result = TransactionLoader.Result
+    public let url:URL
+    public let client:HTTPClient
     
-    private let url: URL
-    private let client: HTTPClient
+    public init(url: URL, client: HTTPClient) {
+        self.url = url
+        self.client = client
+    }
+    
+    public enum Error: Swift.Error {
+        case connectivity
+        case invalidData
+    }
+    
+    public func load() async throws -> [TreeNode] {
+        let url = TreeNodeEndpoint.get.url(baseURL: url)
+        guard let (data, response) = try? await self.client.get(from: url) else{
+            throw Error.connectivity
+        }
+        return try RemoteTreeMapper.mapToTreeNodes(from: data, response: response)
+    }
+    
+    
+}
+
 ...
 ```
 
-it also takes in http protocol to fetch data so RemoteTransactionLoader doesn't care about the implementaion details of the http protocol so it can be URLSession or Alamofire and in our case we use a mock backend.
+it also takes in HTTPClient protocol to fetch data so RemoteTransactionLoader doesn't care about the implementaion details of the http protocol so it can be URLSession or Alamofire.
 
 #### 2. Api Infra
 ```swift
-public class HTTPClientStub: HTTPClient {}
+public protocol HTTPClient {
+    func get(from url: URL) async throws -> (Data, HTTPURLResponse)
+}
 ```
-our implementor of httpclient is a mocked backend but we can always replace it with any other implementation . 
+
+```swift
+public class HTTPClientStub: HTTPClient {}
+
+public class URLSessionHTTPAdapter: HTTPClient {
+    private let session: URLSession
+
+    public init(session: URLSession = URLSession.shared) {
+        self.session = session
+    }
+
+    struct UnexpectedRepresentation: Error {}
+
+    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
+        let (data, response) = try await session.data(from: url)
+        guard let response = response as? HTTPURLResponse else {
+            throw UnexpectedRepresentation()
+        }
+
+        return (data, response)
+    }
+}
+```
+our implementor of httpclient is a URLSESSION  but we can always replace it with any other implementation . 
    
 #### 3. Endpoint Creation
-i separated endpoint creation with relation to the feature so i have to edit a file containing related endpoints to the one I want to add (this case still violates the principle, but considering the relatedness of the endpoints I think it's a good trade-off for now).
+
+I separated endpoint creation with relation to the feature instead of having one single end point for all so I have to only edit a file containing related endpoints.(this case still violates the principle, but considering the relatedness of the endpoints I think it's a good trade-off for now).
 ```swift
-public enum TransactionsEndpoint {
+public enum TreeNodeEndpoint {
     case get
-    
+
     public func url(baseURL: URL) -> URL {
         switch self {
         case .get:
-            return baseURL.appendingPathComponent("transactions")
+            return baseURL.appendingPathComponent("/data.json")
         }
     }
 }
@@ -108,7 +145,7 @@ public enum TransactionsEndpoint {
 
 #### 4. Transaction Mapper
 
-For the mapping from `Data` to `TransactionItem` I preferred to test it directly in the `RemoteStore`, While I could have accomplished this using a stubbed collaborator (e.g. a protocol `DataParser`), I prefered to test it in integration, resulting in lower complexity and coupling of tests with the production code.
+For the mapping from `Data` to `TreeNode` I used RemoteTreeNodeMapper and used it implicitly in the RemoteTreeNodeLoader.I prefer to test it directly with  `RemoteTreeNodeLoader` in integration, resulting in lower complexity and coupling of tests with the production code.
 
 #### 5. Parsing JSON Response
 
@@ -116,70 +153,95 @@ To parse the JSON received from the server I had two alternatives:
 1. To make domain models conform to `Codable` and use them directly to decode the data
 2. Create distinct representation for each domain model that needs to be parsed
 
-I ended up choosing the second approach as I didn't want to leak the details of the concrete implementation outside of the module because it would 
+I ended up choosing the second approach as I didn't want to leak the details of the concrete implementation outside of the module 
 
-
- 
-
-#### From Completion Hander to async/await
-
-Since all modules use the `async/await` concurrency module, I needed to switch from the usual Completion handler pattern.
-
-
-> ❗️ Resuming a continuation must be made exactly once. Otherwise, it results in undefined behaviour, that's why I set it to nil after each resume call, to prevent calling it on the same instance again. Not calling it leaves the task in a suspended state indefinitely. (Apple docs: [CheckedContinuation](https://developer.apple.com/documentation/swift/checkedcontinuation))
-
-```swift
-extension TransactionLoader {
-    public func load() async throws -> [TransactionItem] {
-        return try await withCheckedThrowingContinuation { continuation in
-            self.load{ result in
-                switch result {
-                case .success(let transactionItem):
-                    continuation.resume(with: .success(transactionItem))
-                case .failure(let err):
-                    continuation.resume(throwing: err)
-                }
-            }
-        }
-    }
-}
-```
 
 ### Presentation
 
-This layer makes the requests for getting data using a service and it formats the data exactly how the `UI` module requires it.
+This layer makes the requests for getting data using a service and it formats the data exactly how the UI module requires it.
 
-By decoupling view models from the concrete implementations of the services allowed me to simply add the any behaviour we want later on without changing the view models and shows how the view models conform to the `Open/Closed Principle`. Additionally, since I created separate abstractions for each request, I was able to gradually add functionalities. For this reason, each view model has access to methods it only cares about, thus respecting the `Interface Segregation Principle` and making the concrete implementations depend on the clients' needs as they must conform to the protocol.
+By decoupling view models from the concrete implementations of the services allowed me to simply add the caching and the fallback features later on without changing the view models and shows how the view models conform to the Open/Closed Principle. Additionally, since I created separate abstractions for each request, I was able to gradually add functionalities. For this reason, each view model has access to methods it only cares about, thus respecting the Interface Segregation Principle and making the concrete implementations depend on the clients' needs as they must conform to the protocol.
 
-This layer is also responsible for localization and any sort of formatting of data before it is presented. It is usally plaform agnostic and you can reuse this logic anywhere.
-
-<img width="274" alt="Screenshot 2024-01-16 at 10 53 51" src="https://github.com/abdahad1996/WorldOfPAYBACK/assets/28492677/860c3631-7ff6-4bb6-914e-019a6a5e6ae9">
-
+On the other side, adding all methods in a single protocol would have resulted in violating the Single Responsibility Principle, making the protocol bloated and forcing the clients to implement methods they don't care about. It's also a violation of the Liskov Substitution Principle if the client crashes the app when it doesn't know how to handle that behaviour or simply don't care about implementing it.
 
 Thus, by introducing abstractions, I increased the testability of the view models since mocking their collaborators during testing is a lot easier.
+
+```swift
+import Foundation
+import Core
+import SwiftUI
+
+public class TreeViewModel: ObservableObject {
+	var nodes: [TreeNode] = []
+	public enum LoadingTreeError: String, Swift.Error {
+		case serverError = "Server connection failed. Please try again!"
+	}
+
+    public enum State: Equatable {
+		case idle
+		case isLoading
+		case failure(LoadingTreeError)
+		case success([TreeNode])
+	}
+
+	@Published public var state: State = .idle
+
+	let loader: TreeNodeLoader
+
+    public init(loader: TreeNodeLoader) {
+		self.loader = loader
+	}
+
+	@MainActor public func load() async {
+		do {
+			state = .isLoading
+			nodes = try await loader.load()
+			state = .success(nodes)
+		} catch {
+			state = .failure(.serverError)
+		}
+	}
+
+    public func move(
+		fromOffsets source: IndexSet,
+		toOffset destination: Int) {
+		nodes.move(fromOffsets: source, toOffset: destination)
+		state = .success(nodes)
+	}
+
+    public func deleteNode(at offsets: IndexSet) {
+		nodes.remove(atOffsets: offsets)
+		state = .success(nodes)
+	}
+}
+
+
+```
 
 ### UI
 
 The following diagram is the tree-like representation of all the screens in the app. To increase the reusability of views, I made the decision to move the responsibility of creating subviews to the layer above, meaning the composition root. Additionally, I decoupled all views from the navigation logic by using closures to trigger transitions between them (More details in the [Main](#main) section).
 
-The best example is the `TransactionView` which is defined as a generic view requiring:
-- one closure to signal that the app should navigate to the Transaction details screen (the view being completely agnostic on how the navigation is done)
-- one closure that receives a `transactionCell` and returns a `Cell` view to be rendered (the view is not responsible for creating the cell and doesn't care what cell it receives)
-- one closure that receives a binding to a `Int` and returns a view for total count of all transactions
+<img width="476" alt="Screenshot 2024-03-26 at 3 02 08 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/b1ba58ce-d9c5-4b89-8f42-3715d2df6003">
 
-Furthermore, I avoid making views to depend on their subviews' dependencies by moving the responsibility of creating its subviews to the composition root. Thus, I keep the views constructors containing only dependencies they use.
+The best example is the `TreeView` which is defined as a generic view requiring:
+- one closure to signal that the app should navigate to the Leaf details screen (the view being completely agnostic on how the navigation is done)
+- one closure that receives a `TreeViewCell` and returns a `Cell` view to be rendered (the view is not responsible for creating the cell and doesn't care what cell it receives)
+
+Furthermore, I avoid making views depend on their subviews' dependencies by moving the responsibility of creating its subviews to the composition root. Thus, I keep the views constructors containing only the dependencies they use.
 
 ```swift
 
-public struct TransactionsView<TransactionCell: View, TransactionFilterView: View, TotalCountView:View>: View {
-    @StateObject var viewModel: TransactionViewModel
-    let showTransactionDetails: (TransactionItem) -> Void
-    let transactionCell: (TransactionItem) -> TransactionCell
-    let transactionFilterView: (Binding<Int>,[Int]) -> TransactionFilterView
-    let totalCountView:(Binding<Int>) -> TotalCountView
+public struct TreeView<TreeViewCell: View>: View {
+    let treeViewCell: (TreeNode) -> TreeViewCell
+    let goToDetail: (String) -> Void
+    let designLibrary: DesignLibraryProvider
+    @StateObject var treeViewModel: TreeViewModel
+    @State private var isEditing = false
 
     ...
 ```
+
 
 ### Main
 
@@ -187,8 +249,9 @@ This module is responsible for instantiation and composing all independent modul
 
 Moreover, it represents the composition root of the app and handles the following responsiblities:
 1. Responsible for the Instantiation and life cycle of all modules.
-2. [Adding Sorting Behaviour by intercepting Transaction Loader](#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
+2. Interception(#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
 3. [Handling navigation](#handling-navigation) (hierarchical navigation)
+
 
 
 
@@ -197,35 +260,55 @@ Moreover, it represents the composition root of the app and handles the followin
 
 ##### Hierarchical Navigation
 
-To implement this kind of navigation, I used the new Coordinators and UIhostingController to port SwiftUI views to UIKit type.
+To implement this kind of navigation, I used the new NavigationStack type introduced in iOS 16. Firstly, I created a generic Flow class that can append or remove a new route.
+
 
 ```swift
-final class TransactionFlow {
-    private let navigationController: UINavigationController
-    private let factory: TransactionFactory
-    private let makeUserDetailsController: (UINavigationController, TransactionItem) -> Void
-    init(
-        navigationController: UINavigationController,
-        factory: TransactionFactory,
-        makeUserDetailsController:@escaping (UINavigationController, TransactionItem) -> Void
-    ) {
-        self.navigationController = navigationController
-        self.factory = factory
-        self.makeUserDetailsController = makeUserDetailsController
-    }
-    
-    func start() {
-        let vc = factory.makeTransactionListViewController(selection: showTransactionDetail)
-        navigationController.setViewControllers([vc], animated: false)
-    }
-    
-    private func showTransactionDetail(with transaction: TransactionItem) {
-        self.makeUserDetailsController(navigationController, transaction)
-        
 
-    }
+
+final class Flow<Route: Hashable>: ObservableObject {
+	@Published var path = [Route]()
+
+	func append(_ value: Route) {
+		path.append(value)
+	}
+
+	func navigateBack() {
+		path.removeLast()
+	}
 }
+```
+Secondly, I created enums for each navigation path. For instance, from the TreeView screen, the user can navigate to the Leaf Detail screen . I used the associated value of a case to send additional information between screens. In this case, it's the leaf ID
+
+```swift
+public enum TreeRoute: Hashable {
+	case leaf(String)
+}
+```
+Furthermore, I used the navigationDestination(for:destination:) modifier to define links between the root view and the destination based on the route. The following example is the instantiation of the TreeView and the definition of its navigation destinations which are encapsulated in the TreeFlowView:
+```swift
+@ViewBuilder private func makeTreeFlowView(designLibrary: DesignLibraryProvider)
+        -> some View {
+        NavigationStack(path: $treeflow.path) {
+            TreeFlowView(designLibrary: designLibrary).makeTreeView(
+                flow: treeflow,
+                treeLoader: TreeNodeFactory.treeLoader(baseURL: baseURL)
+            )
+            .navigationBarItems(leading:
+                Toggle(isOn: $isToggled) {
+                    Text("Change Theme")
+                }.foregroundColor(designLibrary.color.text.standard)
+                    .toggleStyle(SwitchToggleStyle(tint: designLibrary.color.background.buttonPrimary))
+            )
+            .navigationDestination(for: TreeRoute.self) { route in
+                switch route {
+                case .leaf(let id):
+                    makeLeafView(id: id, designLibrary: designLibrary)
+                }
+            }
+        }
+    }
 
 ```
 
-I handled all the hierarchical navigation throughout the app, which allowed me to change the screens order from the composition root without affecting other modules. In addition, it improves the overall flexibility and modularity of the system, as the views don't have knowledge about the navigation implementation.
+this allowes me to change the screens order from the composition root without affecting other modules. In addition, it improves the overall flexibility and modularity of the system, as the views don't have knowledge about the navigation implementation.
