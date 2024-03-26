@@ -42,6 +42,8 @@
 		65B1C8282BB2440E00521468 /* DesignLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8212BB2440E00521468 /* DesignLibrary.swift */; };
 		65B1C8292BB2440E00521468 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8222BB2440E00521468 /* CustomFont.swift */; };
 		65B1C82A2BB2440E00521468 /* FontTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8232BB2440E00521468 /* FontTokens.swift */; };
+		65B1C82F2BB248D600521468 /* NavBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C82C2BB248D600521468 /* NavBarModifier.swift */; };
+		65B1C8302BB248D600521468 /* RetryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C82D2BB248D600521468 /* RetryButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		65B1C8222BB2440E00521468 /* CustomFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		65B1C8232BB2440E00521468 /* FontTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontTokens.swift; sourceTree = "<group>"; };
 		65B1C82B2BB2450300521468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		65B1C82C2BB248D600521468 /* NavBarModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBarModifier.swift; sourceTree = "<group>"; };
+		65B1C82D2BB248D600521468 /* RetryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,7 @@
 		65B1C80D2BB242DC00521468 /* UI Module */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C82E2BB248D600521468 /* Component */,
 			);
 			path = "UI Module";
 			sourceTree = "<group>";
@@ -381,6 +386,15 @@
 				65B1C8232BB2440E00521468 /* FontTokens.swift */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		65B1C82E2BB248D600521468 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C82C2BB248D600521468 /* NavBarModifier.swift */,
+				65B1C82D2BB248D600521468 /* RetryButton.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,9 +575,11 @@
 			files = (
 				65B1C8292BB2440E00521468 /* CustomFont.swift in Sources */,
 				65B1C8262BB2440E00521468 /* BaseColors.swift in Sources */,
+				65B1C8302BB248D600521468 /* RetryButton.swift in Sources */,
 				65B1C8282BB2440E00521468 /* DesignLibrary.swift in Sources */,
 				65B1C7992BB1D38E00521468 /* ContentView.swift in Sources */,
 				65B1C8272BB2440E00521468 /* ColorTokens.swift in Sources */,
+				65B1C82F2BB248D600521468 /* NavBarModifier.swift in Sources */,
 				65B1C7972BB1D38E00521468 /* IMGLYApp.swift in Sources */,
 				65B1C82A2BB2440E00521468 /* FontTokens.swift in Sources */,
 				65B1C8252BB2440E00521468 /* MiscellaneousTokens.swift in Sources */,
