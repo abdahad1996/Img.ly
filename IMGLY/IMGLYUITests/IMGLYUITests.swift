@@ -21,10 +21,6 @@ final class IMGLYUITests: XCTestCase {
         app.launch()
     }
     
-//    override func setUpWithError() throws {
-//        launch()
-//       }
-
 
     func testNavigatingFromTreeToLeaf() {
                 launch()
