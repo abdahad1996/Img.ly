@@ -61,6 +61,8 @@
 		65B1C8602BB25D1200521468 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C85D2BB25D1200521468 /* CardView.swift */; };
 		65B1C8612BB25D1200521468 /* LeafViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C85E2BB25D1200521468 /* LeafViewModel.swift */; };
 		65B1C8652BB260C000521468 /* TreeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8642BB260BF00521468 /* TreeViewModelTests.swift */; };
+		65B1C8662BB2676C00521468 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7EB2BB1E8F000521468 /* XCTestCase+MemoryLeakTracking.swift */; };
+		65B1C8672BB26B1500521468 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C80B2BB2372D00521468 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -781,6 +783,8 @@
 			files = (
 				65B1C8652BB260C000521468 /* TreeViewModelTests.swift in Sources */,
 				65B1C8512BB252FF00521468 /* NavigationTests.swift in Sources */,
+				65B1C8662BB2676C00521468 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				65B1C8672BB26B1500521468 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

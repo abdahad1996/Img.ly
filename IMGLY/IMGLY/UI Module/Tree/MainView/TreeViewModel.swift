@@ -9,13 +9,13 @@ import Foundation
 import Core
 import SwiftUI
 
-class TreeViewModel: ObservableObject {
+public class TreeViewModel: ObservableObject {
 	var nodes: [TreeNode] = []
 	public enum LoadingTreeError: String, Swift.Error {
 		case serverError = "Server connection failed. Please try again!"
 	}
 
-	enum State: Equatable {
+    public enum State: Equatable {
 		case idle
 		case isLoading
 		case failure(LoadingTreeError)
@@ -26,11 +26,11 @@ class TreeViewModel: ObservableObject {
 
 	let loader: TreeNodeLoader
 
-	init(loader: TreeNodeLoader) {
+    public init(loader: TreeNodeLoader) {
 		self.loader = loader
 	}
 
-	@MainActor func load() async {
+	@MainActor public func load() async {
 		do {
 			state = .isLoading
 			nodes = try await loader.load()
@@ -40,14 +40,14 @@ class TreeViewModel: ObservableObject {
 		}
 	}
 
-	func move(
+    public func move(
 		fromOffsets source: IndexSet,
 		toOffset destination: Int) {
 		nodes.move(fromOffsets: source, toOffset: destination)
 		state = .success(nodes)
 	}
 
-	func deleteNode(at offsets: IndexSet) {
+    public func deleteNode(at offsets: IndexSet) {
 		nodes.remove(atOffsets: offsets)
 		state = .success(nodes)
 	}

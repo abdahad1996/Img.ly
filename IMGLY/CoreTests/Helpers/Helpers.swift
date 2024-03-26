@@ -17,3 +17,7 @@ import Core
  func anyURL() -> URL {
     return URL(string: "https://a-url.com")!
 }
+
+ var anyError: NSError {
+    NSError(domain: "any error", code: 1)
+}
