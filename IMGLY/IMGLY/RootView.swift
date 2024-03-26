@@ -41,10 +41,19 @@ struct RootView: View {
             .navigationDestination(for: TreeRoute.self) { route in
                 switch route {
                 case .leaf(let id):
-                    let _ = print(id)
+                    makeLeafView(id: id, designLibrary: designLibrary)
                 }
             }
         }
+    }
+    
+    
+    @ViewBuilder private func makeLeafView(id: String, designLibrary: DesignLibraryProvider) -> some View {
+        //remote loader
+        let remoteLeafNodeLoader = LeafFactory.remoteLeafNodeLoader(baseURL: baseURL, id: id)
+        LeafView(leafViewModel:
+            LeafViewModel(loader: remoteLeafNodeLoader,id: id),
+            designLibrary: designLibrary)
     }
 
     

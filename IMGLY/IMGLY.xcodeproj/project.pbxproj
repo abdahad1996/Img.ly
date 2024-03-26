@@ -56,6 +56,11 @@
 		65B1C8512BB252FF00521468 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8502BB252FF00521468 /* NavigationTests.swift */; };
 		65B1C8542BB254C200521468 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8532BB254C200521468 /* RootView.swift */; };
 		65B1C8582BB25AA600521468 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8572BB25AA600521468 /* SplashScreen.swift */; };
+		65B1C85A2BB25CC000521468 /* LeafNodeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8592BB25CC000521468 /* LeafNodeFactory.swift */; };
+		65B1C85F2BB25D1200521468 /* LeafView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C85C2BB25D1200521468 /* LeafView.swift */; };
+		65B1C8602BB25D1200521468 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C85D2BB25D1200521468 /* CardView.swift */; };
+		65B1C8612BB25D1200521468 /* LeafViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C85E2BB25D1200521468 /* LeafViewModel.swift */; };
+		65B1C8652BB260C000521468 /* TreeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8642BB260BF00521468 /* TreeViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +154,11 @@
 		65B1C8502BB252FF00521468 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
 		65B1C8532BB254C200521468 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		65B1C8572BB25AA600521468 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		65B1C8592BB25CC000521468 /* LeafNodeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafNodeFactory.swift; sourceTree = "<group>"; };
+		65B1C85C2BB25D1200521468 /* LeafView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafView.swift; sourceTree = "<group>"; };
+		65B1C85D2BB25D1200521468 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		65B1C85E2BB25D1200521468 /* LeafViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafViewModel.swift; sourceTree = "<group>"; };
+		65B1C8642BB260BF00521468 /* TreeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +245,7 @@
 		65B1C7A62BB1D39100521468 /* IMGLYTests */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8622BB2609000521468 /* UI Module */,
 				65B1C8522BB2547600521468 /* Main */,
 			);
 			path = IMGLYTests;
@@ -379,6 +390,7 @@
 		65B1C80D2BB242DC00521468 /* UI Module */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C85B2BB25CE700521468 /* Leaf */,
 				65B1C8562BB25A9200521468 /* Splash */,
 				65B1C8372BB2492800521468 /* Tree */,
 				65B1C82E2BB248D600521468 /* Component */,
@@ -494,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				65B1C8462BB2508D00521468 /* TreeNodeFactory.swift */,
+				65B1C8592BB25CC000521468 /* LeafNodeFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -530,6 +543,32 @@
 				65B1C8572BB25AA600521468 /* SplashScreen.swift */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		65B1C85B2BB25CE700521468 /* Leaf */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C85D2BB25D1200521468 /* CardView.swift */,
+				65B1C85C2BB25D1200521468 /* LeafView.swift */,
+				65B1C85E2BB25D1200521468 /* LeafViewModel.swift */,
+			);
+			path = Leaf;
+			sourceTree = "<group>";
+		};
+		65B1C8622BB2609000521468 /* UI Module */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8632BB2609800521468 /* Tree */,
+			);
+			path = "UI Module";
+			sourceTree = "<group>";
+		};
+		65B1C8632BB2609800521468 /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8642BB260BF00521468 /* TreeViewModelTests.swift */,
+			);
+			path = Tree;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -713,6 +752,7 @@
 				65B1C84D2BB2523000521468 /* TreeFlowView.swift in Sources */,
 				65B1C84E2BB2523000521468 /* TreeRoute.swift in Sources */,
 				65B1C8392BB2492800521468 /* TreeViewCell.swift in Sources */,
+				65B1C85F2BB25D1200521468 /* LeafView.swift in Sources */,
 				65B1C8292BB2440E00521468 /* CustomFont.swift in Sources */,
 				65B1C8262BB2440E00521468 /* BaseColors.swift in Sources */,
 				65B1C8302BB248D600521468 /* RetryButton.swift in Sources */,
@@ -728,6 +768,9 @@
 				65B1C8582BB25AA600521468 /* SplashScreen.swift in Sources */,
 				65B1C84F2BB2523000521468 /* Flow.swift in Sources */,
 				65B1C8472BB2508D00521468 /* TreeNodeFactory.swift in Sources */,
+				65B1C85A2BB25CC000521468 /* LeafNodeFactory.swift in Sources */,
+				65B1C8602BB25D1200521468 /* CardView.swift in Sources */,
+				65B1C8612BB25D1200521468 /* LeafViewModel.swift in Sources */,
 				65B1C83A2BB2492800521468 /* TreeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,6 +779,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B1C8652BB260C000521468 /* TreeViewModelTests.swift in Sources */,
 				65B1C8512BB252FF00521468 /* NavigationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

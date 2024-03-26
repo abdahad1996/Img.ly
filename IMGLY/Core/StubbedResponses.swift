@@ -32,4 +32,14 @@ public class StubbedReponses {
         return [imgly, nineElements]
     }
     
+    public static func buildLeafNode() -> LeafNode {
+        return LeafNode(id: "25359599-ba54-5132-8309-97c8513e08e9",
+                            createdAt: "2082-09-12T06:43:47.099Z",
+                            createdBy: "du@ijdu.cm",
+                            lastModifiedAt: "2023-08-31T07:07:40.646Z",
+                            lastModifiedBy: "pit@gon.bw",
+                            description: "Duw orevoza jiprudis faz alnaimu sazafapa cuwpe zifehe kowo wasmag otu tuwulfoj bifo se botirgo. Kiojka roftan otecu ohukdu zuaruuze ow ko jogapob naw jadkawwa nem vo fasoz tofih vu oz hizjorguc maj. Kedfov kikodu lan afavo ehonaki be nem du sudomaew mohe vohicemu vultuob muhbacni suzfef ihidozep azitude tilre hubju. Ovdunir ozu melnutvu ti fudolwe ohtet bicun tirat honwajak ujnu ak pelbod cuw coez cu aha. Icuru faabupuf la tu vegelu cinak wuoh hulico nen ri mub cedal sir hakeje guaja supbad togju jolug. Res ipemte bovzahle ih tus hi mopeczaj fahahal ejaha cibvi kene ti gele romi ufpiki lihkefju jol. Perum vudfen micbibo tueku seab nobjeolu keden elgeiv he efoas woz kusfop lirfidu.")
+
+    }
+    
 }
