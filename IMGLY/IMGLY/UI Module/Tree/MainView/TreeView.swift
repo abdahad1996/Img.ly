@@ -49,7 +49,12 @@ public struct TreeView<TreeViewCell: View>: View {
                         treeViewCell(node)
 
                             .onTapGesture {
-                                goToDetail(node.id)
+                                print(node)
+                                print(node.children?.isEmpty ?? false)
+                                if node.children == nil {
+                                    goToDetail(node.id)
+                                }
+                               
                             }
                     
                     }
