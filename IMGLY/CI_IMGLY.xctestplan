@@ -30,6 +30,13 @@
         "identifier" : "65B1C7A22BB1D39100521468",
         "name" : "IMGLYTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:IMGLY.xcodeproj",
+        "identifier" : "65B1C8C42BB2C0E800521468",
+        "name" : "IMGLYUITests"
+      }
     }
   ],
   "version" : 1

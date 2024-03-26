@@ -59,7 +59,7 @@ public struct TreeView<TreeViewCell: View>: View {
                                     goToDetail(node.id)
                                 }
                                
-                            }
+                            }.accessibilityIdentifier("UICellVertical\(node.id)")
                     
                     }
                     .onDelete(perform: treeViewModel.deleteNode)
@@ -67,7 +67,7 @@ public struct TreeView<TreeViewCell: View>: View {
                     .listRowSeparatorTint(designLibrary.color.text.standard)
                     .listRowBackground(Color.clear)
                     
-                }
+                }.accessibilityIdentifier("list")
 
         
                 .listRowInsets(.none)

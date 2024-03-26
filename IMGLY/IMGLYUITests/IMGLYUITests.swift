@@ -10,13 +10,30 @@ import XCTest
 final class IMGLYUITests: XCTestCase {
 
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    private var app: XCUIApplication!
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    fileprivate func launch(command:String = "") {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        continueAfterFailure = false
+        app = XCUIApplication()
+        app.launchArguments = [command]
+        app.launch()
     }
+    
+//    override func setUpWithError() throws {
+//        launch()
+//       }
+
+
+    func testNavigatingFromTreeToLeaf() {
+                launch()
+        TreeViewScreen(app: app)
+            .tapOnCell(with: "imgly.A.1", text: "Entry 1")
+            .verifyMessage(" fuh@wimumamok.lr")
+        
+        }
+    
 
  
 }
