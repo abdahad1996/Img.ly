@@ -55,6 +55,7 @@
 		65B1C84F2BB2523000521468 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C84B2BB2523000521468 /* Flow.swift */; };
 		65B1C8512BB252FF00521468 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8502BB252FF00521468 /* NavigationTests.swift */; };
 		65B1C8542BB254C200521468 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8532BB254C200521468 /* RootView.swift */; };
+		65B1C8582BB25AA600521468 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8572BB25AA600521468 /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		65B1C84B2BB2523000521468 /* Flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
 		65B1C8502BB252FF00521468 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
 		65B1C8532BB254C200521468 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		65B1C8572BB25AA600521468 /* SplashScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +379,7 @@
 		65B1C80D2BB242DC00521468 /* UI Module */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8562BB25A9200521468 /* Splash */,
 				65B1C8372BB2492800521468 /* Tree */,
 				65B1C82E2BB248D600521468 /* Component */,
 			);
@@ -519,6 +522,14 @@
 				65B1C8502BB252FF00521468 /* NavigationTests.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		65B1C8562BB25A9200521468 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8572BB25AA600521468 /* SplashScreen.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -714,6 +725,7 @@
 				65B1C7972BB1D38E00521468 /* IMGLYApp.swift in Sources */,
 				65B1C82A2BB2440E00521468 /* FontTokens.swift in Sources */,
 				65B1C8252BB2440E00521468 /* MiscellaneousTokens.swift in Sources */,
+				65B1C8582BB25AA600521468 /* SplashScreen.swift in Sources */,
 				65B1C84F2BB2523000521468 /* Flow.swift in Sources */,
 				65B1C8472BB2508D00521468 /* TreeNodeFactory.swift in Sources */,
 				65B1C83A2BB2492800521468 /* TreeView.swift in Sources */,

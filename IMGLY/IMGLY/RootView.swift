@@ -13,10 +13,15 @@ struct RootView: View {
 
     @StateObject var treeflow = Flow<TreeRoute>()
     @State private var isToggled = false
-
+    @State private var isActive = false
+    
     var body: some View {
-        
-        makeTreeFlowView(designLibrary: isToggled ? DesignLibraryAlternative() : DesignLibrary())
+        if isActive {
+            makeTreeFlowView(designLibrary: isToggled ? DesignLibraryAlternative() : DesignLibrary())
+
+        } else {
+            SplashScreen(isActive: $isActive)
+        }
 
     }
 
