@@ -31,7 +31,11 @@ public struct TreeView<TreeViewCell: View>: View {
         VStack {
             switch treeViewModel.state {
             case .idle:
-                EmptyView()
+                RetryButton(text: "tap on the button to get data", designLibrary: designLibrary) {
+                    Task {
+                        await treeViewModel.load()
+                    }
+                }
 
             case .isLoading:
                 ProgressView()
