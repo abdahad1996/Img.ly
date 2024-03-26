@@ -1,8 +1,17 @@
 
 
-
 ![GitHub last commit](https://img.shields.io/github/last-commit/abdahad1996/Img.ly?style=for-the-badge)
-!
+
+
+# SUMMARY
+` This project has a Core Framework responsible for providing data to the UI for consumption. The folder structure is as below . For more Details go to the Architecture section.`
+
+<img width="229" alt="Screenshot 2024-03-26 at 12 57 09 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/994c79cd-6107-428c-9f76-53a19eae5b13">
+
+# Code Coverage
+<img width="1161" alt="Screenshot 2024-03-26 at 12 46 34 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/9340e6e0-5059-4934-a4ca-8f9203668234">
+
+
 
 # Img.ly
 💡 My Motivation for this was based on creating single purpose decoupled components following Solid Principles. I think of the design in a critical and scalable way backed by tests which was very fun to do.
@@ -12,6 +21,22 @@
 4. [Tools](#tools)
 5. [Frameworks](#frameworks)
 6. [Concepts](#concepts)
+7. [Architecture](./IMGLY/Readme_Sections/Architecture/Architecture.md#architecture)
+    1. [Overview](./IMGLY/Readme_Sections/Architecture/Architecture.md#overview)
+    2. [Domain](./IMGLY/Readme_Sections/Architecture/Architecture.md#domain)
+        1. [Transaction Feature](./IMGLY/Readme_Sections/Architecture/Architecture.md#1-user-session-feature)
+    3. [Networking](./IMGLY/Readme_Sections/Architecture/Architecture.md#networking)
+    4. [API Infra](./IMGLY/Readme_Sections/Architecture/Architecture.md#api-infra)
+    5. [Presentation](./IMGLY/Readme_Sections/Architecture/Architecture.md#presentation)
+    6. [UI](./IMGLY/Readme_Sections/Architecture/Architecture.md#ui)
+    7. [Main](./IMGLY/Readme_Sections/Architecture/Architecture.md#main)
+8. [Testing Strategy](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#testing-strategy)
+    1. [Unit Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#unit-tests)
+    2. [Integration Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#integration-tests)
+        1. [End-to-End Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
+    3. [Snapshot Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
+9. [CI/CD](./IMGLY/Readme_Sections/CI_Security.md#cicd)  
+   
 
 
 ## Installation Guide
