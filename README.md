@@ -8,7 +8,7 @@
 
 💡 My Motivation for this was based on creating single purpose decoupled components following Solid Principles. I think of the design in a critical and scalable way backed by tests which was very fun to do.
 1. [Installation Guide](#installation-guide)
-2. [Demo Videos](./Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
+2. [Demo Videos](./Img.ly/Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
 3. [Requirements](#Requirements)
 4. [Tools](#tools)
 5. [Frameworks](#frameworks)
