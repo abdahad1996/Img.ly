@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Core
 
 struct RootView: View {
     private let baseURL = URL(string: "https://ubique.img.ly/frontend-tha")!
@@ -52,9 +53,20 @@ struct RootView: View {
     @ViewBuilder private func makeLeafView(id: String, designLibrary: DesignLibraryProvider) -> some View {
         //remote loader
         let remoteLeafNodeLoader = LeafFactory.remoteLeafNodeLoader(baseURL: baseURL, id: id)
+
+        //local loader and local cache
+        let localLeafNodeLoader = LeafFactory.localLeafNodeLoader()
+
+        let leafNodeLoaderCacheDecorator = LeafNodeLoaderCacheDecorator(remoteLeafNodeLoader: remoteLeafNodeLoader, leafNodeCache: localLeafNodeLoader)
+
+        let leafNodeLoaderWithFallbackComposite = LeafNodeLoaderWithFallbackComposite(primaryLoader: leafNodeLoaderCacheDecorator, secondaryLoader: localLeafNodeLoader)
+
+        let loader: LeafNodeLoader = leafNodeLoaderWithFallbackComposite
+
         LeafView(leafViewModel:
-            LeafViewModel(loader: remoteLeafNodeLoader,id: id),
+            LeafViewModel(loader: loader, id: id),
             designLibrary: designLibrary)
+    
     }
 
     
