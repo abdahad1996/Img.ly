@@ -36,7 +36,9 @@
         1. [End-to-End Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
     3. [Snapshot Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
 9. [DesignSystem](#DesignTheme)
-10. [Improvements)](#Improvements)
+10. [Improvements](#Improvements)
+11. 1.[Improvements(Adding Cache to Leaf Detail)](#Improvements-1)
+    
    
 
 
@@ -62,7 +64,7 @@ Test that everything is wired up correctly by running tests for `CI_IOS` targets
 - ✅ SOLID Principles
 - ✅ TDD, Unit Testing, Integration Testing, Snapshot Testing, and UI Testing using Page Object Pattern
 - ✅ Dependency injection and Dependency Inversion
-- ✅ Composition Root, Decorator Patterns, Composite Pattern
+- ✅ Composition Root, Decorator Patterns, Composite Pattern, Command Query Separation, Adapter Pattern
 - ✅ Domain-Driven Design
 
 ## Requirements
@@ -175,4 +177,60 @@ I used the concept of Atomic design to create tokens for colors, fonts, and misc
 - improve theming and color
 - profile app
 - add cache with tests
+
+## Improvements-1 
+### (Adding Cache to Leaf Detail)
+Since I created single-purpose decoupled components with good abstractions and relied on composition roots to create dependencies that means I can use design patterns like decorators and composite.
+
+let's see how I can add caching to leafNodes without changing any other component.
+
+### Adding caching by intercepting network requests
+One extremely beneficial advantage of having a composition root is the ability to inject behaviour into an instance without changing its implementation using the Decorator pattern. I use it to intercept the requests and save the received domain models in the local store.
+
+The following is an example of how I applied the pattern to introduce the caching behaviour after receiving the leaf Nodes. The decorator just conforms to the protocol that the decoratee conforms to and has an additional dependency, the cache, for storing the objects.
+```swift
+class LeafNodeLoaderCacheDecorator: LeafNodeLoader {
+	private let remoteLeafNodeLoader: RemoteLeafNodeLoader
+	private let leafNodeCache: LeafNodeCache
+
+	init(remoteLeafNodeLoader: RemoteLeafNodeLoader, leafNodeCache: any LeafNodeCache) {
+		self.remoteLeafNodeLoader = remoteLeafNodeLoader
+		self.leafNodeCache = leafNodeCache
+	}
+
+	func load(id: String) async throws -> LeafNode {
+		let node = try await remoteLeafNodeLoader.load(id: id)
+		try? await leafNodeCache.save(id: id, node: node)
+		return node
+	}
+}
+```
+### Adding fallback strategies when network requests fail
+The Composite pattern is an effective way to compose multiple implementations of a particular abstraction, executing the first strategy that doesn't fail.
+
+The following is an example of how I composed two strategies of fetching leafNodes using the leafNodeLoader abstraction. I composed two abstractions instead of using concrete types to easily test the composite in isolation and increase the flexibility of the composition as it's not bounded to a given implementation.
+
+```swift
+class LeafNodeLoaderWithFallbackComposite: LeafNodeLoader {
+	private let primaryLoader: LeafNodeLoader
+	private let secondaryLoader: LeafNodeLoader
+
+	init(primaryLoader: LeafNodeLoader, secondaryLoader: LeafNodeLoader) {
+		self.primaryLoader = primaryLoader
+		self.secondaryLoader = secondaryLoader
+	}
+
+	func load(id: String) async throws -> LeafNode {
+		do {
+			return try await primaryLoader.load(id: id)
+		} catch {
+			return try await secondaryLoader.load(id: id)
+		}
+	}
+}
+```
+
+for implementation please see the improvement branch
+https://github.com/abdahad1996/Img.ly/tree/Improvement
+
 
