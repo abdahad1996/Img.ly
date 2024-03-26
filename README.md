@@ -1,7 +1,6 @@
 
 [![CI-iOS](https://github.com/abdahad1996/Img.ly/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/Img.lyactions/workflows/ios.yml)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/abdahad1996/Img.ly?style=for-the-badge)
 
 
 # SUMMARY
