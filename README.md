@@ -1,4 +1,5 @@
 
+[![CI-iOS](https://github.com/abdahad1996/Img.ly/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/Img.lyactions/workflows/ios.yml)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/abdahad1996/Img.ly?style=for-the-badge)
 
@@ -36,7 +37,7 @@
         1. [End-to-End Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
     3. [Snapshot Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
 9. [DesignSystem](#DesignTheme)
-10. [Extra(Caching)](#Extra)
+10. [Improvements)](#Improvements)
    
 
 
@@ -168,6 +169,11 @@ I used the concept of Atomic design to create tokens for colors, fonts, and misc
 <img width="583" alt="Screenshot 2024-03-26 at 3 20 00 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/c4680c56-1b1a-495e-abf9-497001feb5a0">
 
 
-## Extra
-
+## Improvements
+- add more acceptance tests
+- make github action with CI work
+- improve design
+- improve theming and color
+- profile app
+- add cache with tests
 
