@@ -35,8 +35,7 @@
         1. [End-to-End Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
     3. [Snapshot Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
 9. [DesignSystem](#DesignTheme)
-10. [Improvements](#Improvements)
-11. 1.[Improvements(Adding Cache to Leaf Detail)](#Improvements-1)
+10. [References](#References)
     
    
 
@@ -49,11 +48,12 @@
 Test that everything is wired up correctly by running tests for `CI_IOS` targets to validate that all tests pass.
 
 ## Tools
-- ✅ Xcode 15.3
+- ✅ Xcode 16.0
 - ✅ swift-driver version: 1.90.11.1 Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
 
 ## Frameworks
 - ✅ SwiftUI
+- ✅ Async/Await
 - ✅ Combine
 - ✅ No third party
 
@@ -168,6 +168,14 @@ I used the concept of Atomic design to create tokens for colors, fonts, and misc
 
 <img width="583" alt="Screenshot 2024-03-26 at 3 20 00 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/c4680c56-1b1a-495e-abf9-497001feb5a0">
 
+## References
 
+1. [The iOS Lead Essential Program](https://iosacademy.essentialdeveloper.com/p/ios-lead-essentials/)
+2. [Clean Architecture](https://www.goodreads.com/book/show/18043011-clean-architecture?ac=1&from_search=true&qid=cebbBLQz86&rank=1) by Robert C. Martin
+3. [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.goodreads.com/book/show/3735293-clean-code?from_search=true&from_srp=true&qid=0lfCKDxK4E&rank=1) by Robert C. Martin
+4. [Dependency Injection Principles, Practices, and Patterns](https://www.goodreads.com/book/show/44416307-dependency-injection-principles-practices-and-patterns?ref=nav_sb_ss_1_27) by Mark Seemann and Steven van Deursen
+5. [Domain-Driven Design: Tackling Complexity in the Heart of Software](https://www.goodreads.com/book/show/179133.Domain_Driven_Design?ref=nav_sb_noss_l_16)
+6. [Design It! : Pragmatic Programmers: From Programmer to Software Architect](https://www.goodreads.com/book/show/31670678-design-it?from_search=true&from_srp=true&qid=Nm98t342VP&rank=6) by Michael Keeling
+g
 
 
