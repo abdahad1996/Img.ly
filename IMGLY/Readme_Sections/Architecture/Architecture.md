@@ -20,8 +20,8 @@ I follow the following subset of UML introduced to me by https://academy.essenti
 
 let's focus on how Tree View consumes Core to Display the UI.
 1. [Domain](#domain)
-2. [Api](#Api)
-3. [Persistence](#Persistence)
+2. [Api](#api)
+3. [Persistence](#persistence)
 4. [Infra](#infra)
 5. [Presentation](#presentation)
 6. [UI](#ui)
@@ -67,7 +67,7 @@ public protocol TreeNodeLoader {
     func load() async throws -> [TreeNode]
 }
 ```
-#### 1. LeafNode Feature
+#### 2. LeafNode Feature
 
 
 ```swift
@@ -101,7 +101,7 @@ public protocol LeafNodeLoader {
 
 ```
 
-### #Api
+### Api
 
 The layer showcases the API layer, which communicates with infrastructure layer to communicate with the backend .
 
