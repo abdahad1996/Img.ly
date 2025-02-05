@@ -23,7 +23,7 @@ let's focus on how Tree View consumes Core to Display the UI.
 2. [Api](#api)
 3. [Persistence](#persistence)
 3. [Presentation](#presentation)
-4. [Infrastructure](#infra)
+4. [Infrastructure](#infrastructure)
 5. [UI](#ui)
 6. [Main](#main)(Composition Root)
      
