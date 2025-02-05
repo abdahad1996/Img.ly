@@ -21,7 +21,7 @@ I follow the following subset of UML introduced to me by https://academy.essenti
 let's focus on how Tree View consumes Core to Display the UI.
 1. [Domain](#domain)
 2. [Api](#api)
-3. [Persistence](#persistence)
+3. [Persistence(LeafNode only)](#persistence)
 4. [Infra](#infra)
 5. [Presentation](#presentation)
 6. [UI](#ui)
@@ -33,11 +33,11 @@ let's focus on how Tree View consumes Core to Display the UI.
 The domain represents the innermost layer in the architecture (no dependencies with other layers). It contains only models and abstractions for:
 
 #### Tree Node
-- fetching data(#Api)
+- fetching data[Api](#api)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
 
 #### Leaf Node
-- fetching data(#Api)
+- fetching data[Api](#api)
 - saving and fetching data locally(#persistence)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
 
