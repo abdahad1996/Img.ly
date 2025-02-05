@@ -1,5 +1,5 @@
 {
-  "originHash" : "b9159aa27a422399912f35454325024ddea3ad5d70382a9d9575206085ec7373",
+  "originHash" : "eae349887e6b2abac6905c3bf734cf3e581a76cd4eed2f7ea4bdddbaf19bc492",
   "pins" : [
     {
       "identity" : "swift-snapshot-testing",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
         "version" : "510.0.1"
+      }
+    },
+    {
+      "identity" : "viewinspector",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nalexn/ViewInspector",
+      "state" : {
+        "revision" : "67319287749b83f39dcc2f20edd520c610c012fd",
+        "version" : "0.9.10"
       }
     }
   ],

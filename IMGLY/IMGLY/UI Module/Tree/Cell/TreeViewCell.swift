@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 import Core
 
-struct TreeCell: View {
+public struct TreeCell: View {
 	let treeCellViewModel: TreeCellViewModel
 	let designLibrary: DesignLibraryProvider
 
-	init(treeCellViewModel: TreeCellViewModel, designLibrary: DesignLibraryProvider) {
+    public init(treeCellViewModel: TreeCellViewModel, designLibrary: DesignLibraryProvider) {
 		self.treeCellViewModel = treeCellViewModel
 		self.designLibrary = designLibrary
 	}
 
-	var body: some View {
+    public var body: some View {
 		let _ = print("node label, \(treeCellViewModel.label), node level, \(treeCellViewModel.level)")
 
 		HStack {

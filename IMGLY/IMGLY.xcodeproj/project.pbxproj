@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6516579C2BC6312E004C383B /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 6516579B2BC6312E004C383B /* ViewInspector */; };
+		6516579E2BC63150004C383B /* IntegerationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6516579D2BC63150004C383B /* IntegerationTest.swift */; };
 		65B1C7972BB1D38E00521468 /* IMGLYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C7962BB1D38E00521468 /* IMGLYApp.swift */; };
 		65B1C79B2BB1D39000521468 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65B1C79A2BB1D39000521468 /* Assets.xcassets */; };
 		65B1C79E2BB1D39000521468 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65B1C79D2BB1D39000521468 /* Preview Assets.xcassets */; };
@@ -91,6 +93,14 @@
 		65B1C8C02BB2BFEB00521468 /* test_treeViewSuccessState.light.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B1C8B42BB2BFE900521468 /* test_treeViewSuccessState.light.png */; };
 		65B1C8C82BB2C0E800521468 /* IMGLYUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8C72BB2C0E800521468 /* IMGLYUITests.swift */; };
 		65B1C8D12BB2C6F000521468 /* TreeViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8D02BB2C6F000521468 /* TreeViewScreen.swift */; };
+		65B1C8D52BB3176100521468 /* LeafNodeLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8D22BB3176000521468 /* LeafNodeLoaderCacheDecorator.swift */; };
+		65B1C8D62BB3176100521468 /* LeafNodeLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8D32BB3176000521468 /* LeafNodeLoaderWithFallbackComposite.swift */; };
+		65B1C8DB2BB317D800521468 /* CodableFileSystemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8D82BB317D800521468 /* CodableFileSystemAdapter.swift */; };
+		65B1C8DC2BB317D800521468 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8D92BB317D800521468 /* LocalStore.swift */; };
+		65B1C8DE2BB3181300521468 /* LeafNodeCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8DD2BB3181300521468 /* LeafNodeCache.swift */; };
+		65B1C8E32BB3182500521468 /* LocalLeafNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8DF2BB3182400521468 /* LocalLeafNode.swift */; };
+		65B1C8E42BB3182500521468 /* LocalLeafNodeLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8E02BB3182400521468 /* LocalLeafNodeLoader.swift */; };
+		65B1C8E52BB3182500521468 /* LocalLeafNodeMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B1C8E12BB3182400521468 /* LocalLeafNodeMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +156,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6516579D2BC63150004C383B /* IntegerationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerationTest.swift; sourceTree = "<group>"; };
 		65B1C7932BB1D38E00521468 /* IMGLY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IMGLY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B1C7962BB1D38E00521468 /* IMGLYApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMGLYApp.swift; sourceTree = "<group>"; };
 		65B1C79A2BB1D39000521468 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -230,6 +241,14 @@
 		65B1C8C52BB2C0E800521468 /* IMGLYUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IMGLYUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65B1C8C72BB2C0E800521468 /* IMGLYUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMGLYUITests.swift; sourceTree = "<group>"; };
 		65B1C8D02BB2C6F000521468 /* TreeViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeViewScreen.swift; sourceTree = "<group>"; };
+		65B1C8D22BB3176000521468 /* LeafNodeLoaderCacheDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNodeLoaderCacheDecorator.swift; sourceTree = "<group>"; };
+		65B1C8D32BB3176000521468 /* LeafNodeLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNodeLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		65B1C8D82BB317D800521468 /* CodableFileSystemAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableFileSystemAdapter.swift; sourceTree = "<group>"; };
+		65B1C8D92BB317D800521468 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
+		65B1C8DD2BB3181300521468 /* LeafNodeCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeafNodeCache.swift; sourceTree = "<group>"; };
+		65B1C8DF2BB3182400521468 /* LocalLeafNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalLeafNode.swift; sourceTree = "<group>"; };
+		65B1C8E02BB3182400521468 /* LocalLeafNodeLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalLeafNodeLoader.swift; sourceTree = "<group>"; };
+		65B1C8E12BB3182400521468 /* LocalLeafNodeMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalLeafNodeMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +266,7 @@
 			files = (
 				65B1C8702BB2832400521468 /* InlineSnapshotTesting in Frameworks */,
 				65B1C8722BB2832400521468 /* SnapshotTesting in Frameworks */,
+				6516579C2BC6312E004C383B /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +350,7 @@
 				65B1C86B2BB27FCC00521468 /* Helper */,
 				65B1C8622BB2609000521468 /* UI Module */,
 				65B1C8522BB2547600521468 /* Main */,
+				6516579D2BC63150004C383B /* IntegerationTest.swift */,
 			);
 			path = IMGLYTests;
 			sourceTree = "<group>";
@@ -412,8 +433,8 @@
 		65B1C7F02BB2304700521468 /* Infra */ = {
 			isa = PBXGroup;
 			children = (
-				65B1C7F12BB2306700521468 /* HTTPClient.swift */,
-				65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */,
+				65B1C8DA2BB317D800521468 /* Persistence */,
+				65B1C8D72BB317B800521468 /* Api */,
 			);
 			path = Infra;
 			sourceTree = "<group>";
@@ -429,6 +450,7 @@
 		65B1C7F82BB2334D00521468 /* Leaf */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8E22BB3182400521468 /* Cache */,
 				65B1C7FE2BB2341100521468 /* Api */,
 				65B1C7FD2BB233E800521468 /* Domain */,
 			);
@@ -439,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				65B1C7FA2BB2338600521468 /* LeafNode.swift */,
+				65B1C8DD2BB3181300521468 /* LeafNodeCache.swift */,
 				65B1C7F92BB2338600521468 /* LeafNodeLoader.swift */,
 			);
 			path = Domain;
@@ -579,6 +602,7 @@
 		65B1C8442BB24FAF00521468 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				65B1C8D42BB3176000521468 /* CompositionHelpers */,
 				65B1C84C2BB2523000521468 /* Navigation */,
 				65B1C8452BB2507F00521468 /* Factory */,
 			);
@@ -766,6 +790,43 @@
 			path = IMGLYUITests;
 			sourceTree = "<group>";
 		};
+		65B1C8D42BB3176000521468 /* CompositionHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8D22BB3176000521468 /* LeafNodeLoaderCacheDecorator.swift */,
+				65B1C8D32BB3176000521468 /* LeafNodeLoaderWithFallbackComposite.swift */,
+			);
+			path = CompositionHelpers;
+			sourceTree = "<group>";
+		};
+		65B1C8D72BB317B800521468 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C7F12BB2306700521468 /* HTTPClient.swift */,
+				65B1C7F52BB2328A00521468 /* URLSessionHttpAdapter.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		65B1C8DA2BB317D800521468 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8D82BB317D800521468 /* CodableFileSystemAdapter.swift */,
+				65B1C8D92BB317D800521468 /* LocalStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		65B1C8E22BB3182400521468 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				65B1C8DF2BB3182400521468 /* LocalLeafNode.swift */,
+				65B1C8E02BB3182400521468 /* LocalLeafNodeLoader.swift */,
+				65B1C8E12BB3182400521468 /* LocalLeafNodeMapper.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -816,6 +877,7 @@
 			packageProductDependencies = (
 				65B1C86F2BB2832400521468 /* InlineSnapshotTesting */,
 				65B1C8712BB2832400521468 /* SnapshotTesting */,
+				6516579B2BC6312E004C383B /* ViewInspector */,
 			);
 			productName = IMGLYTests;
 			productReference = 65B1C7A32BB1D39100521468 /* IMGLYTests.xctest */;
@@ -918,6 +980,7 @@
 			mainGroup = 65B1C78A2BB1D38E00521468;
 			packageReferences = (
 				65B1C86E2BB2832400521468 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+				6516579A2BC6312D004C383B /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = 65B1C7942BB1D38E00521468 /* Products */;
 			projectDirPath = "";
@@ -1008,8 +1071,10 @@
 				65B1C8392BB2492800521468 /* TreeViewCell.swift in Sources */,
 				65B1C85F2BB25D1200521468 /* LeafView.swift in Sources */,
 				65B1C8292BB2440E00521468 /* CustomFont.swift in Sources */,
+				65B1C8D52BB3176100521468 /* LeafNodeLoaderCacheDecorator.swift in Sources */,
 				65B1C8262BB2440E00521468 /* BaseColors.swift in Sources */,
 				65B1C8302BB248D600521468 /* RetryButton.swift in Sources */,
+				65B1C8D62BB3176100521468 /* LeafNodeLoaderWithFallbackComposite.swift in Sources */,
 				65B1C8542BB254C200521468 /* RootView.swift in Sources */,
 				65B1C8282BB2440E00521468 /* DesignLibrary.swift in Sources */,
 				65B1C8272BB2440E00521468 /* ColorTokens.swift in Sources */,
@@ -1039,6 +1104,7 @@
 				65B1C8662BB2676C00521468 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				65B1C88E2BB2B83E00521468 /* LeafViewSnapShotTests.swift in Sources */,
 				65B1C8672BB26B1500521468 /* Helpers.swift in Sources */,
+				6516579E2BC63150004C383B /* IntegerationTest.swift in Sources */,
 				65B1C86A2BB27F9700521468 /* LeafViewModelTests.swift in Sources */,
 				65B1C86D2BB27FDB00521468 /* Helper.swift in Sources */,
 			);
@@ -1048,16 +1114,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65B1C8DE2BB3181300521468 /* LeafNodeCache.swift in Sources */,
 				65B1C8072BB2353C00521468 /* LeafNodeEndPoint.swift in Sources */,
+				65B1C8E42BB3182500521468 /* LocalLeafNodeLoader.swift in Sources */,
 				65B1C7EF2BB2300D00521468 /* RemoteTreeNodeLoader.swift in Sources */,
 				65B1C7E42BB1DE2700521468 /* TreeNodeLoader.swift in Sources */,
+				65B1C8DB2BB317D800521468 /* CodableFileSystemAdapter.swift in Sources */,
 				65B1C8022BB2345800521468 /* RemoteLeafNodeLoader.swift in Sources */,
 				65B1C7FB2BB2338600521468 /* LeafNodeLoader.swift in Sources */,
 				65B1C7F22BB2306700521468 /* HTTPClient.swift in Sources */,
 				65B1C7F42BB2309F00521468 /* RemoteTreeMapper.swift in Sources */,
+				65B1C8DC2BB317D800521468 /* LocalStore.swift in Sources */,
 				65B1C8432BB24A5000521468 /* StubbedResponses.swift in Sources */,
 				65B1C7F62BB2328A00521468 /* URLSessionHttpAdapter.swift in Sources */,
+				65B1C8E52BB3182500521468 /* LocalLeafNodeMapper.swift in Sources */,
 				65B1C7E22BB1DD5F00521468 /* TreeNode.swift in Sources */,
+				65B1C8E32BB3182500521468 /* LocalLeafNode.swift in Sources */,
 				65B1C7FC2BB2338600521468 /* LeafNode.swift in Sources */,
 				65B1C8052BB234D600521468 /* TreeNodeEndPoint.swift in Sources */,
 				65B1C8012BB2345800521468 /* RemoteLeafNodeMapper.swift in Sources */,
@@ -1251,6 +1323,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1281,6 +1354,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1557,6 +1631,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6516579A2BC6312D004C383B /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.10;
+			};
+		};
 		65B1C86E2BB2832400521468 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
@@ -1568,6 +1650,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6516579B2BC6312E004C383B /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6516579A2BC6312D004C383B /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
 		65B1C86F2BB2832400521468 /* InlineSnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 65B1C86E2BB2832400521468 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;

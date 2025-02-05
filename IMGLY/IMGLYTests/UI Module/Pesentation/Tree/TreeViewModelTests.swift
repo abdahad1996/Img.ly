@@ -103,7 +103,7 @@ final class TreeViewModelTests: XCTestCase {
         
         func load() async throws -> [TreeNode] {
             
-            
+
             if let result = result {
                 return try result.get()
             }
@@ -114,17 +114,7 @@ final class TreeViewModelTests: XCTestCase {
         
     }
     
-    // Mock TreeNodeLoader
-        class MockTreeNodeLoader: TreeNodeLoader {
-            func load() async throws -> [TreeNode] {
-                // Return sample data
-                return [
-                    TreeNode(id: "1", label: "Node 1"),
-                    TreeNode(id: "2", label: "Node 2"),
-                    TreeNode(id: "3", label: "Node 3")
-                ]
-            }
-        }
+   
     
 }
 

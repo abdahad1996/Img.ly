@@ -9,10 +9,10 @@ import Foundation
 import SwiftUI
 import Core
 
-class TreeCellViewModel {
+public class TreeCellViewModel {
 	let node: TreeNode
 
-	init(node: TreeNode) {
+    public init(node: TreeNode) {
 		self.node = node
 	}
 

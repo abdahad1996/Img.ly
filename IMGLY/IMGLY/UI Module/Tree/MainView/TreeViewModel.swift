@@ -14,7 +14,6 @@ public class TreeViewModel: ObservableObject {
 	public enum LoadingTreeError: String, Swift.Error {
 		case serverError = "Server connection failed. Please try again!"
 	}
-
     public enum State: Equatable {
 		case idle
 		case isLoading

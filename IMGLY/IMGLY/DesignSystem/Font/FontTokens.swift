@@ -1,51 +1,51 @@
 import Foundation
 import SwiftUI
 
-struct FontTokens: FontTokensProvider {
-	let cardFont: CardFontProvider = CardFont()
-	let buttonFont: ButtonFontProvider = ButtonFont()
+public struct FontTokens: FontTokensProvider {
+  public let cardFont: CardFontProvider = CardFont()
+  public let buttonFont: ButtonFontProvider = ButtonFont()
 }
 
-struct FontTokensAlternative: FontTokensProvider {
-	let cardFont: CardFontProvider = CardFontAlternative()
-	let buttonFont: ButtonFontProvider = ButtonFontAlternative()
+public struct FontTokensAlternative: FontTokensProvider {
+  public let cardFont: CardFontProvider = CardFontAlternative()
+  public let buttonFont: ButtonFontProvider = ButtonFontAlternative()
 }
 
-protocol FontTokensProvider {
-	var cardFont: CardFontProvider { get }
-	var buttonFont: ButtonFontProvider { get }
+public protocol FontTokensProvider {
+  var cardFont: CardFontProvider { get }
+  var buttonFont: ButtonFontProvider { get }
 }
 
 // MARK: Card
 
-struct CardFont: CardFontProvider {
-	let title = Font.custom(CustomFont.heptaSlabBold.rawValue, size: 36)
-	let body = Font.custom(CustomFont.spaceGroteskRegular.rawValue, size: 16)
-	let price = Font.custom(CustomFont.heptaSlabBold.rawValue, size: 24)
+public struct CardFont: CardFontProvider {
+  public let title = Font.custom(CustomFont.heptaSlabBold.rawValue, size: 36)
+  public let body = Font.custom(CustomFont.spaceGroteskRegular.rawValue, size: 16)
+  public let price = Font.custom(CustomFont.heptaSlabBold.rawValue, size: 24)
 }
 
-struct CardFontAlternative: CardFontProvider {
-	let title = Font.custom(CustomFont.playfairDisplayBold.rawValue, size: 36)
-	let body = Font.custom(CustomFont.ralewayRegular.rawValue, size: 16)
-	let price = Font.custom(CustomFont.playfairDisplayBold.rawValue, size: 24)
+public struct CardFontAlternative: CardFontProvider {
+  public let title = Font.custom(CustomFont.playfairDisplayBold.rawValue, size: 36)
+  public let body = Font.custom(CustomFont.ralewayRegular.rawValue, size: 16)
+  public let price = Font.custom(CustomFont.playfairDisplayBold.rawValue, size: 24)
 }
 
-protocol CardFontProvider {
-	var title: Font { get }
-	var body: Font { get }
-	var price: Font { get }
+public protocol CardFontProvider {
+  var title: Font { get }
+  var body: Font { get }
+  var price: Font { get }
 }
 
 // MARK: Button
 
-struct ButtonFont: ButtonFontProvider {
-	let standard = Font.custom(CustomFont.spaceGroteskBold.rawValue, size: 16)
+public struct ButtonFont: ButtonFontProvider {
+  public let standard = Font.custom(CustomFont.spaceGroteskBold.rawValue, size: 16)
 }
 
-struct ButtonFontAlternative: ButtonFontProvider {
-	let standard = Font.custom(CustomFont.ralewayBold.rawValue, size: 16)
+public struct ButtonFontAlternative: ButtonFontProvider {
+  public let standard = Font.custom(CustomFont.ralewayBold.rawValue, size: 16)
 }
 
-protocol ButtonFontProvider {
-	var standard: Font { get }
+public protocol ButtonFontProvider {
+  var standard: Font { get }
 }

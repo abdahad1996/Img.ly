@@ -1,65 +1,65 @@
 import Foundation
 import SwiftUI
 
-struct MiscellaneousTokens: MiscellaneousTokensProvider {
-	let cornerRadius: CornerRadiusesProvider = CornerRadiuses()
-	let opacity: OpacitiesProvider = Opacities()
-	let asset: AssetNamesProvider = AssetNames()
+public struct MiscellaneousTokens: MiscellaneousTokensProvider {
+  public let cornerRadius: CornerRadiusesProvider = CornerRadiuses()
+  public let opacity: OpacitiesProvider = Opacities()
+  public let asset: AssetNamesProvider = AssetNames()
 }
 
-struct MiscellaneousTokensAlternative: MiscellaneousTokensProvider {
-	let cornerRadius: CornerRadiusesProvider = CornerRadiusesAlternative()
-	let opacity: OpacitiesProvider = OpacitiesAlternative()
-	let asset: AssetNamesProvider = AssetNamesAlternative()
+public struct MiscellaneousTokensAlternative: MiscellaneousTokensProvider {
+  public let cornerRadius: CornerRadiusesProvider = CornerRadiusesAlternative()
+  public let opacity: OpacitiesProvider = OpacitiesAlternative()
+  public let asset: AssetNamesProvider = AssetNamesAlternative()
 }
 
-protocol MiscellaneousTokensProvider {
-	var cornerRadius: CornerRadiusesProvider { get }
-	var opacity: OpacitiesProvider { get }
-	var asset: AssetNamesProvider { get }
+public protocol MiscellaneousTokensProvider {
+  var cornerRadius: CornerRadiusesProvider { get }
+  var opacity: OpacitiesProvider { get }
+  var asset: AssetNamesProvider { get }
 }
 
 // MARK: CornerRadius
 
-struct CornerRadiuses: CornerRadiusesProvider {
-	let card: Double = 32
-	let button: Double = 100
+public struct CornerRadiuses: CornerRadiusesProvider {
+  public let card: Double = 32
+  public let button: Double = 100
 }
 
-struct CornerRadiusesAlternative: CornerRadiusesProvider {
-	let card: Double = 4
-	let button: Double = 4
+public struct CornerRadiusesAlternative: CornerRadiusesProvider {
+  public let card: Double = 4
+  public let button: Double = 4
 }
 
-protocol CornerRadiusesProvider {
-	var card: Double { get }
-	var button: Double { get }
+public protocol CornerRadiusesProvider {
+  var card: Double { get }
+  var button: Double { get }
 }
 
 // MARK: Opacity
 
-struct Opacities: OpacitiesProvider {
-	let cardDetails: Double = 0.6
+public struct Opacities: OpacitiesProvider {
+  public let cardDetails: Double = 0.6
 }
 
-struct OpacitiesAlternative: OpacitiesProvider {
-	let cardDetails: Double = 1
+public struct OpacitiesAlternative: OpacitiesProvider {
+  public let cardDetails: Double = 1
 }
 
-protocol OpacitiesProvider {
-	var cardDetails: Double { get }
+public protocol OpacitiesProvider {
+  var cardDetails: Double { get }
 }
 
 // MARK: Asset
 
-struct AssetNames: AssetNamesProvider {
-	let cardBackground = "img2"
+public struct AssetNames: AssetNamesProvider {
+  public let cardBackground = "img2"
 }
 
-struct AssetNamesAlternative: AssetNamesProvider {
-	let cardBackground = "img1"
+public struct AssetNamesAlternative: AssetNamesProvider {
+  public let cardBackground = "img1"
 }
 
-protocol AssetNamesProvider {
-	var cardBackground: String { get }
+public protocol AssetNamesProvider {
+  var cardBackground: String { get }
 }
