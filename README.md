@@ -24,17 +24,18 @@
     1. [Overview](./IMGLY/Readme_Sections/Architecture/Architecture.md#overview)
     2. [Domain](./IMGLY/Readme_Sections/Architecture/Architecture.md#domain)
     3. [Api](./IMGLY/Readme_Sections/Architecture/Architecture.md#api)
-    4. [Persistence](./IMGLY/Readme_Sections/Architecture/Architecture.md#infra)
+    4. [Persistence](./IMGLY/Readme_Sections/Architecture/Architecture.md#persistence)
     5. [Presentation](./IMGLY/Readme_Sections/Architecture/Architecture.md#presentation)
-    6. [UI](./IMGLY/Readme_Sections/Architecture/Architecture.md#ui)
-    7. [Main](./IMGLY/Readme_Sections/Architecture/Architecture.md#main)
+    6. [Infrastructure](./IMGLY/Readme_Sections/Architecture/Architecture.md#infrastructure)
+    7. [UI](./IMGLY/Readme_Sections/Architecture/Architecture.md#ui)
+    8. [Main](./IMGLY/Readme_Sections/Architecture/Architecture.md#main)
 8. [Testing Strategy](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#testing-strategy)
     1. [Unit Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#unit-tests)
     2. [Integration Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#integration-tests)
         1. [End-to-End Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#end-to-end-tests)
     3. [Snapshot Tests](./IMGLY/Readme_Sections/Testing_Strategy/Testing_Strategy.md#snapshot-tests)
-9. [DesignSystem](#DesignTheme)
-10. [References](#References)
+9. [DesignSystem](#designTheme)
+10. [References](#references)
     
    
 
