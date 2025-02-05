@@ -21,11 +21,11 @@ I follow the following subset of UML introduced to me by https://academy.essenti
 let's focus on how Tree View consumes Core to Display the UI.
 1. [Domain](#domain)
 2. [Api](#api)
-3. [Persistence(LeafNode only)](#persistence)
-4. [Infra](#infra)
-5. [Presentation](#presentation)
-6. [UI](#ui)
-7. [Main](#main)(Composition Root)
+3. [Persistence](#persistence)
+3. [Presentation](#presentation)
+4. [Infrastructure](#infra)
+5. [UI](#ui)
+6. [Main](#main)(Composition Root)
      
 ### Domain 
 ![Screenshot 2025-02-05 at 8 38 42 PM](https://github.com/user-attachments/assets/905224f8-058a-40d5-b804-644daee9761a)
@@ -33,11 +33,11 @@ let's focus on how Tree View consumes Core to Display the UI.
 The domain represents the innermost layer in the architecture (no dependencies with other layers). It contains only models and abstractions for:
 
 #### Tree Node
-- fetching data[Api](#api)
+- fetching data [Api](#api)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
 
 #### Leaf Node
-- fetching data[Api](#api)
+- fetching data [Api](#api)
 - saving and fetching data locally(#persistence)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
 
@@ -210,7 +210,7 @@ To parse the JSON received from the server I had two alternatives:
 
 I ended up choosing the second approach as I didn't want to leak the details of the concrete implementation outside of the module 
 
-### Persistence(LeafNode only)
+### Persistence
 
 The layer showcases the Cache layer, which communicates with infrastructure layer to communicate with the local Database .
 
