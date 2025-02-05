@@ -1,106 +1,106 @@
 import Foundation
 import SwiftUI
 
-struct ColorTokens: ColorTokensProvider {
-	let icon: IconColorsProvider = IconColors()
-	let text: TextColorsProvider = TextColors()
-	let background: BackgroundColorsProvider = BackgroundColors()
+public struct ColorTokens: ColorTokensProvider {
+  public let icon: IconColorsProvider = IconColors()
+  public let text: TextColorsProvider = TextColors()
+  public let background: BackgroundColorsProvider = BackgroundColors()
 }
 
-struct ColorTokensAlternative: ColorTokensProvider {
-	let icon: IconColorsProvider = IconColorsAlternative()
-	let text: TextColorsProvider = TextColorsAlternative()
-	let background: BackgroundColorsProvider = BackgroundColorsAlternative()
+public struct ColorTokensAlternative: ColorTokensProvider {
+  public let icon: IconColorsProvider = IconColorsAlternative()
+  public let text: TextColorsProvider = TextColorsAlternative()
+  public let background: BackgroundColorsProvider = BackgroundColorsAlternative()
 }
 
-protocol ColorTokensProvider {
-	var icon: IconColorsProvider { get }
-	var text: TextColorsProvider { get }
-	var background: BackgroundColorsProvider { get }
+public protocol ColorTokensProvider {
+  var icon: IconColorsProvider { get }
+  var text: TextColorsProvider { get }
+  var background: BackgroundColorsProvider { get }
 }
 
 // MARK: Icon
 
-struct IconColors: IconColorsProvider {
-	let promo: Color
-	let buttonPrimary: Color
+public struct IconColors: IconColorsProvider {
+  public let promo: Color
+  public let buttonPrimary: Color
 
-	init(baseColors: BaseColorsProvider = BaseColors()) {
-		self.promo = baseColors.brandPrimary
-		self.buttonPrimary = baseColors.dark
-	}
+  init(baseColors: BaseColorsProvider = BaseColors()) {
+    self.promo = baseColors.brandPrimary
+    self.buttonPrimary = baseColors.dark
+  }
 }
 
-struct IconColorsAlternative: IconColorsProvider {
-	let buttonPrimary: Color
-	let promo: Color
+public struct IconColorsAlternative: IconColorsProvider {
+  public let buttonPrimary: Color
+  public let promo: Color
 
-	init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
-		self.buttonPrimary = baseColors.brandSecondary
-		self.promo = baseColors.brandSecondary
-	}
+  init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
+    self.buttonPrimary = baseColors.brandSecondary
+    self.promo = baseColors.brandSecondary
+  }
 }
 
-protocol IconColorsProvider {
-	var buttonPrimary: Color { get }
-	var promo: Color { get }
+public protocol IconColorsProvider {
+  var buttonPrimary: Color { get }
+  var promo: Color { get }
 }
 
 // MARK: Text
 
-struct TextColors: TextColorsProvider {
-	let standard: Color
-	let buttonPrimary: Color
+public struct TextColors: TextColorsProvider {
+  public let standard: Color
+  public let buttonPrimary: Color
 
-	init(baseColors: BaseColorsProvider = BaseColors()) {
-		self.standard = baseColors.white
-		self.buttonPrimary = baseColors.dark
-	}
+  init(baseColors: BaseColorsProvider = BaseColors()) {
+    self.standard = baseColors.white
+    self.buttonPrimary = baseColors.dark
+  }
 }
 
-struct TextColorsAlternative: TextColorsProvider {
-	let standard: Color
-	let buttonPrimary: Color
+public struct TextColorsAlternative: TextColorsProvider {
+  public let standard: Color
+  public let buttonPrimary: Color
 
-	init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
-		self.standard = baseColors.dark
-		self.buttonPrimary = baseColors.white
-	}
+  init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
+    self.standard = baseColors.dark
+    self.buttonPrimary = baseColors.white
+  }
 }
 
-protocol TextColorsProvider {
-	var standard: Color { get }
-	var buttonPrimary: Color { get }
+public protocol TextColorsProvider {
+  var standard: Color { get }
+  var buttonPrimary: Color { get }
 }
 
 // MARK: Background
 
-struct BackgroundColors: BackgroundColorsProvider {
-	var cell: Color
-	let cardDetails: Color
-	let buttonPrimary: Color
+public struct BackgroundColors: BackgroundColorsProvider {
+  public var cell: Color
+  public let cardDetails: Color
+  public let buttonPrimary: Color
 
-	init(baseColors: BaseColorsProvider = BaseColors()) {
-		self.cardDetails = baseColors.black
-		self.buttonPrimary = baseColors.brandPrimary
-		self.cell = baseColors.dark
-	}
+  init(baseColors: BaseColorsProvider = BaseColors()) {
+    self.cardDetails = baseColors.black
+    self.buttonPrimary = baseColors.brandPrimary
+    self.cell = baseColors.dark
+  }
 }
 
-struct BackgroundColorsAlternative: BackgroundColorsProvider {
-	var cell: Color
-	let cardDetails: Color
-	let buttonPrimary: Color
+public struct BackgroundColorsAlternative: BackgroundColorsProvider {
+  public var cell: Color
+  public let cardDetails: Color
+  public let buttonPrimary: Color
 
-	init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
-		self.cardDetails = baseColors.cream
-		self.buttonPrimary = baseColors.brandPrimary
-		self.cell = baseColors.brandSecondary
-	}
+  init(baseColors: BaseColorsProvider = BaseColorsAlternative()) {
+    self.cardDetails = baseColors.cream
+    self.buttonPrimary = baseColors.brandPrimary
+    self.cell = baseColors.brandSecondary
+  }
 }
 
-protocol BackgroundColorsProvider {
-	var cardDetails: Color { get }
-	var buttonPrimary: Color { get }
-	var cell: Color { get }
+public protocol BackgroundColorsProvider {
+  var cardDetails: Color { get }
+  var buttonPrimary: Color { get }
+  var cell: Color { get }
 }

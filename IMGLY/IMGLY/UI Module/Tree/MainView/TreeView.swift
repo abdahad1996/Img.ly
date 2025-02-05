@@ -9,6 +9,30 @@ import Foundation
 import SwiftUI
 import Core
 
+//extension View {
+//    func viewDidLoad(_ action: @escaping () -> Void) -> some View {
+//        modifier(ViewDidLoadModifier(action: action))
+//    }
+//}
+//
+//private struct ViewDidLoadModifier: ViewModifier {
+//    private let action: () -> Void
+//    @State private var viewDidLoad = false
+//    
+//    init(action: @escaping () -> Void) {
+//        self.action = action
+//    }
+//    
+//    func body(content: Content) -> some View {
+//        content
+//            .onAppear {
+//                if viewDidLoad { return }
+//                viewDidLoad = true
+//                
+//                action()
+//            }
+//    }
+//}
 public struct TreeView<TreeViewCell: View>: View {
     let treeViewCell: (TreeNode) -> TreeViewCell
     let goToDetail: (String) -> Void
@@ -16,7 +40,7 @@ public struct TreeView<TreeViewCell: View>: View {
     @StateObject var treeViewModel: TreeViewModel
     @State private var isEditing = false
 
-    init(treeViewModel: TreeViewModel,
+    public init(treeViewModel: TreeViewModel,
          treeViewCell: @escaping (TreeNode) -> TreeViewCell,
          goToDetail: @escaping (String) -> Void,
          designLibrary: DesignLibraryProvider
@@ -35,10 +59,10 @@ public struct TreeView<TreeViewCell: View>: View {
                     Task {
                         await treeViewModel.load()
                     }
-                }
+                }.accessibilityIdentifier("RetryButton")
 
             case .isLoading:
-                ProgressView()
+                ProgressView().accessibilityIdentifier("ProgressView")
 
             case .failure(let error):
                 RetryButton(text: error.rawValue, designLibrary: designLibrary) {
@@ -80,17 +104,34 @@ public struct TreeView<TreeViewCell: View>: View {
                 .navigationBar(backgroundColor: designLibrary.color.background.cardDetails, titleColor: designLibrary.color.text.standard)
                 .navigationBarItems(trailing: editButton)
             }
-        }
-
+        }.accessibilityIdentifier("mainview")
+//        .viewDidLoad {
+//            Task{
+//                if treeViewModel.state == .idle {
+//                    await treeViewModel.load()
+//                }
+//            }
+//             
+//        }
+            .task {
+                if treeViewModel.state == .idle {
+                    await treeViewModel.load()
+                }
+            }
         .refreshable {
             await treeViewModel.load()
         }
-        .task {
-            if treeViewModel.state == .idle {
-                await treeViewModel.load()
-            }
-        }
+//        .onAppear() {
+//            task{
+//                if treeViewModel.state == .idle {
+//                    await treeViewModel.load()
+//                }
+//            }
+//            
+//        }
+        
     }
+    
 
     @ViewBuilder var editButton: some View {
         Button(action: {
@@ -126,6 +167,5 @@ struct StubLoader:TreeNodeLoader{
     func load() async throws -> [TreeNode] {
         return StubbedReponses.buildTreeNodeHierarchy()
     }
-    
     
 }

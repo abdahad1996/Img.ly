@@ -55,15 +55,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65B1C7A22BB1D39100521468"
-            BuildableName = "IMGLYTests.xctest"
-            BlueprintName = "IMGLYTests"
-            ReferencedContainer = "container:IMGLY.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

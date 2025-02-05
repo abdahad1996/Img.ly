@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol LeafNodeLoader {
-	func load(id: String) async throws -> LeafNode
+  func load(id: String) async throws -> LeafNode
 }
