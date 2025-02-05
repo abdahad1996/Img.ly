@@ -20,17 +20,27 @@ I follow the following subset of UML introduced to me by https://academy.essenti
 
 let's focus on how Tree View consumes Core to Display the UI.
 1. [Domain](#domain)
-2. [Remote TreeNode Loader](#Api)
-4. [API Infra](#api-infra)
-7. [Presentation](#presentation)
-8. [UI](#ui)
-9. [Main](#main) (Composition Root)
+2. [Api](#Api)
+3. [Persistence](#Persistence)
+4. [Infra](#infra)
+5. [Presentation](#presentation)
+6. [UI](#ui)
+7. [Main](#main)(Composition Root)
      
-### Domain (Tree Node)
+### Domain 
+![Screenshot 2025-02-05 at 8 38 42 PM](https://github.com/user-attachments/assets/905224f8-058a-40d5-b804-644daee9761a)
 
 The domain represents the innermost layer in the architecture (no dependencies with other layers). It contains only models and abstractions for:
-- fetching data by the [Remote TreeNode Loader](#networking)
+
+#### Tree Node
+- fetching data(#Api)
 - the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
+
+#### Leaf Node
+- fetching data(#Api)
+- saving and fetching data locally(#persistence)
+- the [Presentation](#presentation) module to obtain relevant data and convert it to the format required by the [UI](#ui) module
+
 
 #### 1. TreeNode Feature
 
@@ -48,7 +58,7 @@ public struct TreeNode: Identifiable, Equatable {
         self.children = children
         self.parentId = parentId
         self.level = level
-    }
+    }   
 }
 ```
 
@@ -57,12 +67,47 @@ public protocol TreeNodeLoader {
     func load() async throws -> [TreeNode]
 }
 ```
+#### 1. LeafNode Feature
+
+
+```swift
+public struct LeafNode: Identifiable, Equatable {
+	public let id: String
+	public let createdAt: String
+	public let createdBy: String
+	public let lastModifiedAt: String
+	public let lastModifiedBy: String
+	public let description: String
+	
+	public init(id: String, createdAt: String, createdBy: String, lastModifiedAt: String, lastModifiedBy: String, description: String) 	{
+           self.id = id
+           self.createdAt = createdAt
+           self.createdBy = createdBy
+           self.lastModifiedAt = lastModifiedAt
+           self.lastModifiedBy = lastModifiedBy
+           self.description = description
+	}
+}
+
+```
+
+```swift
+public protocol LeafNodeCache {
+	func save(id: String, node: LeafNode) async throws
+}
+public protocol LeafNodeLoader {
+  func load(id: String) async throws -> LeafNode
+}
+
+```
 
 ### #Api
-The following diagram showcases the API layer, which communicates with my backend app. For a better understanding, 
+
+The layer showcases the API layer, which communicates with infrastructure layer to communicate with the backend .
+
 #### 1. RemoteTreeNodeLoader
 
-this class implements the transaction loader from the domain so we invert the dependency and instead of our domain depending on the API our API depends on the domain and our domain can be independent of any dependency.
+this class implements the transaction loader from the Tree domain so we invert the dependency and instead of our domain depending on the API our API depends on the domain and our domain can be independent of any dependency.
 
 ```swift
 public class RemoteTreeNodeLoader:TreeNodeLoader {
@@ -96,37 +141,34 @@ public class RemoteTreeNodeLoader:TreeNodeLoader {
 
 it also takes in HTTPClient protocol to fetch data so RemoteTransactionLoader doesn't care about the implementaion details of the http protocol so it can be URLSession or Alamofire.
 
-#### 2. Api Infra
-```swift
-public protocol HTTPClient {
-    func get(from url: URL) async throws -> (Data, HTTPURLResponse)
-}
+#### 2. RemoteLeafNodeLoader
+The RemoteLeafNodeLoader does the same as RemoteTreeNodeLoader
 ```
+public final class RemoteLeafNodeLoader: LeafNodeLoader {
+	private let url: URL
+	private let client: HTTPClient
 
-```swift
-public class HTTPClientStub: HTTPClient {}
+	public enum Error: Swift.Error {
+		case connectivity
+		case invalidData
+	}
 
-public class URLSessionHTTPAdapter: HTTPClient {
-    private let session: URLSession
+	public init(url: URL, client: HTTPClient) {
+		self.url = url
+		self.client = client
+	}
 
-    public init(session: URLSession = URLSession.shared) {
-        self.session = session
-    }
-
-    struct UnexpectedRepresentation: Error {}
-
-    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
-        let (data, response) = try await session.data(from: url)
-        guard let response = response as? HTTPURLResponse else {
-            throw UnexpectedRepresentation()
+	public func load(id: String) async throws -> LeafNode {
+        let url = LeafNodeEndpoint.get(id).url(baseURL: url)
+        guard let (data, response) = try? await self.client.get(from: url) else{
+            throw Error.connectivity
         }
-
-        return (data, response)
-    }
+		return try RemoteLeafMapper.mapToLeafNode(from: data, response: response)
+	}
 }
+
 ```
-our implementor of httpclient is a URLSESSION  but we can always replace it with any other implementation . 
-   
+
 #### 3. Endpoint Creation
 
 I separated endpoint creation with relation to the feature instead of having one single end point for all so I have to only edit a file containing related endpoints.(this case still violates the principle, but considering the relatedness of the endpoints I think it's a good trade-off for now).
@@ -141,11 +183,24 @@ public enum TreeNodeEndpoint {
         }
     }
 }
+
+
+public enum LeafNodeEndpoint {
+    case get(String)
+    public func url(baseURL: URL) -> URL {
+        switch self {
+        case let .get(id):
+            return baseURL.appendingPathComponent("/entries/\(id).json")
+        }
+    }
+}
 ```
 
-#### 4. Transaction Mapper
 
-For the mapping from `Data` to `TreeNode` I used RemoteTreeNodeMapper and used it implicitly in the RemoteTreeNodeLoader.I prefer to test it directly with  `RemoteTreeNodeLoader` in integration, resulting in lower complexity and coupling of tests with the production code.
+#### 4. Mapper
+
+For the mapping from `Data` to `TreeNode` or `LeafNode` I used separate RemoteTreeNodeMapper and RemoteLeafMapper  and used it implicitly in the RemoteTreeNodeLoader and RemoteLeafNodeLoader respectively .I prefer to test it directly in integration instead of injecting it, resulting in lower complexity and coupling of tests with the production code.
+
 
 #### 5. Parsing JSON Response
 
@@ -154,6 +209,63 @@ To parse the JSON received from the server I had two alternatives:
 2. Create distinct representation for each domain model that needs to be parsed
 
 I ended up choosing the second approach as I didn't want to leak the details of the concrete implementation outside of the module 
+
+### Persistence(LeafNode only)
+
+The layer showcases the Cache layer, which communicates with infrastructure layer to communicate with the local Database .
+
+
+#### 1 LocalLeafNodeLoader
+this class implements the loader and cache abstraction from the Leaf domain so we invert the dependency and instead of our domain depending on the Persistence our Persistence layer depends on the domain and our domain can be independent of any dependency.
+
+
+```
+public final class LocalLeafNodeLoader: LeafNodeLoader, LeafNodeCache {
+	private let store: LocalStore
+	private let currentDate: () -> Date
+
+	private struct CacheMissError: Error {}
+
+	public init(store: LocalStore, currentDate: @escaping () -> Date) {
+		self.store = store
+		self.currentDate = currentDate
+	}
+
+	public func load(id: String) async throws -> LeafNode {
+		do {
+			let loader = try await store.read(id: id)
+			return LocalLeafNodeMapper.toDomain(node: loader)
+		} catch {
+			throw CacheMissError()
+		}
+	}
+
+	public func save(id: String, node: LeafNode) async throws {
+		try await store.write(id, LocalLeafNodeMapper.toLocal(node: node), timestamp: currentDate())
+	}
+}
+
+```
+
+#### 2 LocalLeafNodeMapper
+
+```
+
+public enum LocalLeafNodeMapper {
+	static func toLocal(node: LeafNode) -> LocalLeafNode {
+		return LocalLeafNode(node: node)
+	}
+
+	static func toDomain(node: LocalLeafNode) -> LeafNode {
+		return LeafNode(id: node.id, createdAt: node.createdAt, createdBy: node.createdAt, lastModifiedAt: node.lastModifiedAt, lastModifiedBy: node.lastModifiedBy, description: node.description)
+	}
+}
+
+
+```
+In order to save in the local database our domain should conform to type the local db understands in the case of `coredata` it is `nsmanagedobject` , if we go that route then all modules that depend on Domain would depend on an implementation detail of the Persistence module, thus coupling the business logic with a specific framework (leaking framework details). 
+
+Since I wanted to hide all implementation details related to persistence, maintain modularity and decrease the coupling of domain models with a specific framework, I decided to create a separate managed model corresponding to the domain model used in the infrastrucutre module and have a mapper that has functionality that converts from localmodel and to domain and vice versa.
 
 
 ### Presentation
@@ -241,6 +353,149 @@ public struct TreeView<TreeViewCell: View>: View {
 
     ...
 ```
+### Infrastructure
+This layer uses the infrastructure class offered by iOS to communicate with external systems.
+
+
+#### 1. Api Infra
+The following diagram contains the concrete implementation of the HTTPClient protocol having URLSession as dependency this way our loaders do not know of implementation details.We can easily replace URLSession with Alamofire in the future. It respects the dependency rule outlined in the overview section. The decision to extract the infrastructure class in a separate module(Virtual) and compose them in the Composition Root was made due to the fact that both TreeNodeFeature and LeafNodeFeature require to make network requests.
+
+```swift
+public protocol HTTPClient {
+    func get(from url: URL) async throws -> (Data, HTTPURLResponse)
+}
+```
+
+```swift
+public class HTTPClientStub: HTTPClient {}
+
+public class URLSessionHTTPAdapter: HTTPClient {
+    private let session: URLSession
+
+    public init(session: URLSession = URLSession.shared) {
+        self.session = session
+    }
+
+    struct UnexpectedRepresentation: Error {}
+
+    public func get(from url: URL) async throws -> (Data, HTTPURLResponse) {
+        let (data, response) = try await session.data(from: url)
+        guard let response = response as? HTTPURLResponse else {
+            throw UnexpectedRepresentation()
+        }
+
+        return (data, response)
+    }
+}
+```
+
+#### 2. Cache Infra
+The following diagram contains the concrete implementation of the LocalStore protocol having CodableFileSystem as dependency this way our loaders do not know of implementation details.We can easily replace CodableFileSystem with CoreData in the future. It respects the dependency rule outlined in the overview section. We also use LocalModels that correspond to the domain that are used in the infrastucture layer making our domain independent.
+
+```
+public class CodableFileSystemAdapter: LocalStore {
+	private struct Cache: Codable {
+		let codableLeafNode: CodableLeafNode
+		let timestamp: Date
+		let id: String
+
+		var localLeafNode: LocalLeafNode {
+			return codableLeafNode.localLeafNode
+		}
+	}
+
+	public struct CodableLeafNode: Codable {
+		public let id: String
+		public let createdAt: String
+		public let createdBy: String
+		public let lastModifiedAt: String
+		public let lastModifiedBy: String
+		public let description: String
+
+		init(node: LocalLeafNode) {
+			self.id = node.id
+			self.createdAt = node.createdAt
+			self.createdBy = node.createdBy
+			self.lastModifiedAt = node.lastModifiedAt
+			self.lastModifiedBy = node.lastModifiedBy
+			self.description = node.description
+		}
+
+		var localLeafNode: LocalLeafNode {
+			return LocalLeafNode(id: id, createdAt: createdAt, createdBy: createdBy, lastModifiedAt: lastModifiedAt, lastModifiedBy: lastModifiedBy, description: description)
+		}
+	}
+
+	private struct CacheMissError: Error {}
+
+	private let storeURL: URL
+
+	public init(storeURL: URL) {
+		self.storeURL = storeURL
+	}
+
+	public func read(id: String) async throws -> LocalLeafNode {
+		let storeURL = self.storeURL
+
+		guard let data = try? Data(contentsOf: storeURL) else {
+			throw CacheMissError()
+		}
+		do {
+			let decoder = JSONDecoder()
+			let cacheArr = try decoder.decode([Cache].self, from: data)
+
+			guard let cache = cacheArr.first(where: { $0.id == id }) else {
+				throw CacheMissError()
+			}
+
+			return cache.localLeafNode
+		} catch {
+			throw CacheMissError()
+		}
+	}
+
+    fileprivate func saveFirstTime(_ object: LocalLeafNode, _ timestamp: Date, _ id: String) throws {
+        let encoder = JSONEncoder()
+        let cache = Cache(codableLeafNode: CodableLeafNode(node: object), timestamp: timestamp, id: id)
+        var cacheArr = [Cache]()
+        cacheArr.append(cache)
+        let encoded = try encoder.encode(cacheArr)
+        try encoded.write(to: storeURL)
+    }
+    
+    public func write(_ id: String, _ object: LocalLeafNode, timestamp: Date) async throws {
+		do {
+			guard let data = try? Data(contentsOf: storeURL) else {
+                try saveFirstTime(object, timestamp, id)
+				throw CacheMissError()
+			}
+
+			let decoder = JSONDecoder()
+			var cacheArr = try? decoder.decode([Cache].self, from: data)
+
+			let encoder = JSONEncoder()
+			let cache = Cache(codableLeafNode: CodableLeafNode(node: object), timestamp: timestamp, id: id)
+
+			//append and save back
+			if var cacheArr = cacheArr {
+				cacheArr.append(cache)
+				let encoded = try encoder.encode(cacheArr)
+				try encoded.write(to: storeURL)
+			} else {
+				var cacheArr = [Cache]()
+				cacheArr.append(cache)
+				let encoded = try encoder.encode(cacheArr)
+				try encoded.write(to: storeURL)
+			}
+
+		} catch {
+			throw CacheMissError()
+		}
+	}
+}
+
+
+```
 
 
 ### Main
@@ -251,7 +506,6 @@ Moreover, it represents the composition root of the app and handles the followin
 1. Responsible for the Instantiation and life cycle of all modules.
 2. Interception(#adding-caching-by-intercepting-network-requests) (`Decorator Pattern`)
 3. [Handling navigation](#handling-navigation) (hierarchical navigation)
-
 
 
 
