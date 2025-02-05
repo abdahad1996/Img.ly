@@ -2,19 +2,18 @@
 [![CI-iOS](https://github.com/abdahad1996/Img.ly/actions/workflows/ios.yml/badge.svg)](https://github.com/abdahad1996/Img.lyactions/workflows/ios.yml)
 
 
+# Img.ly
+💡 My Motivation for this project was to create a pure SwiftUI+Async/Await based hierarchical tree structure app that consumes a hierarchical json following Solid Principles,Clean Architecture and Testability. I think of the design in a critical and scalable way backed by tests which was very fun to do.
+
+# Code Coverage
+<img width="1161" alt="Screenshot 2024-03-26 at 12 46 34 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/9340e6e0-5059-4934-a4ca-8f9203668234">
 
 # SUMMARY
 ` This project has a Core Framework responsible for providing data to the UI for consumption. The folder structure is as below . For more Details go to the Architecture section.`
 
 <img width="229" alt="Screenshot 2024-03-26 at 12 57 09 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/994c79cd-6107-428c-9f76-53a19eae5b13">
 
-# Code Coverage
-<img width="1161" alt="Screenshot 2024-03-26 at 12 46 34 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/9340e6e0-5059-4934-a4ca-8f9203668234">
-
-
-
-# Img.ly
-💡 My Motivation for this was based on creating single purpose decoupled components following Solid Principles. I think of the design in a critical and scalable way backed by tests which was very fun to do.
+# DETAIL
 1. [Installation Guide](#installation-guide)
 2. [Demo Screenshots](./IMGLY/Readme_Sections/Demo_Videos/Demo_Videos.md#demo-videos)
 3. [Requirements](#Requirements)
@@ -170,67 +169,5 @@ I used the concept of Atomic design to create tokens for colors, fonts, and misc
 <img width="583" alt="Screenshot 2024-03-26 at 3 20 00 PM" src="https://github.com/abdahad1996/Img.ly/assets/28492677/c4680c56-1b1a-495e-abf9-497001feb5a0">
 
 
-## Improvements
-- add more acceptance tests
-- make github action with CI work
-- improve design
-- improve theming and color
-- profile app
-- add cache with tests
-
-## Improvements-1 
-### (Adding Cache to Leaf Detail)
-Since I created single-purpose decoupled components with good abstractions and relied on composition roots to create dependencies that means I can use design patterns like decorators and composite.
-
-let's see how I can add caching to leafNodes without changing any other component.
-
-### Adding caching by intercepting network requests
-One extremely beneficial advantage of having a composition root is the ability to inject behaviour into an instance without changing its implementation using the Decorator pattern. I use it to intercept the requests and save the received domain models in the local store.
-
-The following is an example of how I applied the pattern to introduce the caching behaviour after receiving the leaf Nodes. The decorator just conforms to the protocol that the decoratee conforms to and has an additional dependency, the cache, for storing the objects.
-```swift
-class LeafNodeLoaderCacheDecorator: LeafNodeLoader {
-	private let remoteLeafNodeLoader: RemoteLeafNodeLoader
-	private let leafNodeCache: LeafNodeCache
-
-	init(remoteLeafNodeLoader: RemoteLeafNodeLoader, leafNodeCache: any LeafNodeCache) {
-		self.remoteLeafNodeLoader = remoteLeafNodeLoader
-		self.leafNodeCache = leafNodeCache
-	}
-
-	func load(id: String) async throws -> LeafNode {
-		let node = try await remoteLeafNodeLoader.load(id: id)
-		try? await leafNodeCache.save(id: id, node: node)
-		return node
-	}
-}
-```
-### Adding fallback strategies when network requests fail
-The Composite pattern is an effective way to compose multiple implementations of a particular abstraction, executing the first strategy that doesn't fail.
-
-The following is an example of how I composed two strategies of fetching leafNodes using the leafNodeLoader abstraction. I composed two abstractions instead of using concrete types to easily test the composite in isolation and increase the flexibility of the composition as it's not bounded to a given implementation.
-
-```swift
-class LeafNodeLoaderWithFallbackComposite: LeafNodeLoader {
-	private let primaryLoader: LeafNodeLoader
-	private let secondaryLoader: LeafNodeLoader
-
-	init(primaryLoader: LeafNodeLoader, secondaryLoader: LeafNodeLoader) {
-		self.primaryLoader = primaryLoader
-		self.secondaryLoader = secondaryLoader
-	}
-
-	func load(id: String) async throws -> LeafNode {
-		do {
-			return try await primaryLoader.load(id: id)
-		} catch {
-			return try await secondaryLoader.load(id: id)
-		}
-	}
-}
-```
-
-for implementation please see the improvement branch
-https://github.com/abdahad1996/Img.ly/tree/Improvement
 
 
