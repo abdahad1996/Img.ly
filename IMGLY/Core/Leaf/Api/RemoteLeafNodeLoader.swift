@@ -8,24 +8,26 @@
 import Foundation
 
 public final class RemoteLeafNodeLoader: LeafNodeLoader {
-	private let url: URL
-	private let client: HTTPClient
+    private let url: URL
+    private let client: HTTPClient
 
-	public enum Error: Swift.Error {
-		case connectivity
-		case invalidData
-	}
+    public enum Error: Swift.Error {
+        case connectivity
+        case invalidData
+    }
 
-	public init(url: URL, client: HTTPClient) {
-		self.url = url
-		self.client = client
-	}
+    public init(url: URL, client: HTTPClient) {
+        self.url = url
+        self.client = client
+    }
 
-	public func load(id: String) async throws -> LeafNode {
+    public func load(id: String) async throws -> LeafNode {
         let url = LeafNodeEndpoint.get(id).url(baseURL: url)
-        guard let (data, response) = try? await self.client.get(from: url) else{
+        guard let (data, response) = try? await self.client.get(from: url)
+        else {
             throw Error.connectivity
         }
-		return try RemoteLeafMapper.mapToLeafNode(from: data, response: response)
-	}
+        return try RemoteLeafMapper.mapToLeafNode(
+            from: data, response: response)
+    }
 }

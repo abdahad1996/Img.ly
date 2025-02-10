@@ -7,7 +7,6 @@
 
 import Foundation
 
-//usecase
 public protocol TreeNodeLoader {
-  func load() async throws -> [TreeNode]
+    func load() async throws -> [TreeNode]
 }

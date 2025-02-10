@@ -8,15 +8,15 @@
 import Foundation
 
 final public class Flow<Route: Hashable>: ObservableObject {
-  public init() {
-  }
-  @Published var path = [Route]()
+    public init() {
+    }
+    @Published var path = [Route]()
 
-  func append(_ value: Route) {
-    path.append(value)
-  }
+    func append(_ value: Route) {
+        path.append(value)
+    }
 
-  func navigateBack() {
-    path.removeLast()
-  }
+    func navigateBack() {
+        path.removeLast()
+    }
 }

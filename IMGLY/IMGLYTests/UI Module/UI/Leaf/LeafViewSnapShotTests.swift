@@ -5,12 +5,12 @@
 //  Created by macbook abdul on 26/03/2024.
 //
 
+import Core
 import Foundation
-
-import XCTest
 import SnapshotTesting
 import SwiftUI
-import Core
+import XCTest
+
 @testable import IMGLY
 
 final class LeafViewSnapshotTests: XCTestCase {
@@ -34,17 +34,19 @@ final class LeafViewSnapshotTests: XCTestCase {
     }
 
     func test_leafViewSuccessState() {
-        let sut = makeSUT(getLeafViewState: .success(StubbedReponses.buildLeafNode()))
+        let sut = makeSUT(
+            getLeafViewState: .success(StubbedReponses.buildLeafNode()))
 
         assertLightAndDarkSnapshot(matching: sut)
     }
-    
+
     func test_leafViewSuccessState_DifferentTheme() {
-        let sut = makeSUT(getLeafViewState: .success(StubbedReponses.buildLeafNode()),designLibrary: DesignLibraryAlternative())
+        let sut = makeSUT(
+            getLeafViewState: .success(StubbedReponses.buildLeafNode()),
+            designLibrary: DesignLibraryAlternative())
 
         assertLightAndDarkSnapshot(matching: sut)
     }
-
 
     // MARK: - Helpers
 
@@ -52,18 +54,20 @@ final class LeafViewSnapshotTests: XCTestCase {
         getLeafViewState: LeafViewModel.State,
         designLibrary: DesignLibraryProvider = DesignLibrary()
     ) -> some View {
-        let leafViewModel = LeafViewModel(loader: EmptyStubLeafNodeLoader(), id: "")
+        let leafViewModel = LeafViewModel(
+            loader: EmptyStubLeafNodeLoader(), id: "")
         leafViewModel.state = getLeafViewState
-        
-        return LeafView(leafViewModel: leafViewModel, designLibrary:designLibrary)
-        
+
+        return LeafView(
+            leafViewModel: leafViewModel, designLibrary: designLibrary)
+
     }
 
     private class EmptyStubLeafNodeLoader: LeafNodeLoader {
         func load(id: String) async throws -> LeafNode {
             return StubbedReponses.buildLeafNode()
         }
-        
+
     }
 
 }

@@ -1,6 +1,6 @@
+import Core
 import Foundation
 import SwiftUI
-import Core
 
 struct CardView: View {
     let designLibrary: DesignLibraryProvider
@@ -10,17 +10,17 @@ struct CardView: View {
             Image(designLibrary.miscellaneous.asset.cardBackground)
                 .mask {
                     RoundedRectangle(
-                        cornerRadius: designLibrary.miscellaneous.cornerRadius.card,
+                        cornerRadius: designLibrary.miscellaneous.cornerRadius
+                            .card,
                         style: .continuous
                     )
                 }
-            
+
             VStack {
                 HStack {
-                    
-                    
+
                     Spacer()
-                    
+
                     Image("clover")
                         .renderingMode(.template)
                         .padding(.top)
@@ -28,13 +28,12 @@ struct CardView: View {
                         .foregroundColor(designLibrary.color.icon.promo)
                 }
                 .padding(.horizontal, 24)
-                
+
                 Spacer()
-                
+
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        
-                        
+
                         Text(leaf.description)
                             .minimumScaleFactor(0.5)
                             .font(designLibrary.font.cardFont.body)
@@ -42,10 +41,9 @@ struct CardView: View {
                             .padding(.leading, 10)
                     }
                     .padding(.leading)
-                    
+
                     Spacer()
-                    
-                    
+
                 }
                 .frame(height: 112)
                 .background(
@@ -53,9 +51,10 @@ struct CardView: View {
                         designLibrary.miscellaneous.opacity.cardDetails
                     )
                 )
-                .clipShape(RoundedCorner(
-                    radius: designLibrary.miscellaneous.cornerRadius.card,
-                    corners: [.bottomLeft, .bottomRight])
+                .clipShape(
+                    RoundedCorner(
+                        radius: designLibrary.miscellaneous.cornerRadius.card,
+                        corners: [.bottomLeft, .bottomRight])
                 )
             }
         }
@@ -66,13 +65,16 @@ struct CardView: View {
 struct RoundedCorner: Shape {
     var radius: CGFloat
     var corners: UIRectCorner
-    
+
     func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(
+            roundedRect: rect, byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    CardView(designLibrary: DesignLibrary(), leaf:StubbedReponses.buildLeafNode())
+    CardView(
+        designLibrary: DesignLibrary(), leaf: StubbedReponses.buildLeafNode())
 }

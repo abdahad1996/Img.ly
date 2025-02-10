@@ -8,5 +8,5 @@
 import Foundation
 
 public enum TreeRoute: Hashable {
-	case leaf(String)
+    case leaf(String)
 }

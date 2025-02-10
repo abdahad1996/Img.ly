@@ -1,3 +1,6 @@
+import Core
+import SnapshotTesting
+import SwiftUI
 //
 //  TreeViewSnapShotTests.swift
 //  IMGLYTests
@@ -5,9 +8,7 @@
 //  Created by macbook abdul on 26/03/2024.
 //
 import XCTest
-import SnapshotTesting
-import SwiftUI
-import Core
+
 @testable import IMGLY
 
 final class TreeViewSnapshotTests: XCTestCase {
@@ -31,13 +32,18 @@ final class TreeViewSnapshotTests: XCTestCase {
     }
 
     func test_treeViewSuccessState() {
-        let sut = makeSUT(getTreeViewrState: .success(StubbedReponses.buildTreeNodeHierarchy()))
+        let sut = makeSUT(
+            getTreeViewrState: .success(
+                StubbedReponses.buildTreeNodeHierarchy()))
 
         assertLightAndDarkSnapshot(matching: sut)
     }
 
     func test_TreeViewSuccessState_DifferentTheme() {
-        let sut = makeSUT(getTreeViewrState: .success(StubbedReponses.buildTreeNodeHierarchy()),designLibrary: DesignLibraryAlternative())
+        let sut = makeSUT(
+            getTreeViewrState: .success(
+                StubbedReponses.buildTreeNodeHierarchy()),
+            designLibrary: DesignLibraryAlternative())
 
         assertLightAndDarkSnapshot(matching: sut)
     }
@@ -50,11 +56,14 @@ final class TreeViewSnapshotTests: XCTestCase {
     ) -> some View {
         let treeViewModel = TreeViewModel(loader: EmptyStubTreeNodeLoader())
         treeViewModel.state = getTreeViewrState
-        
-       
-        return TreeView(treeViewModel: treeViewModel, treeViewCell: { node in
-            TreeCell(treeCellViewModel: TreeCellViewModel(node: node), designLibrary: designLibrary)
-        }, goToDetail: {_ in}, designLibrary: designLibrary)
+
+        return TreeView(
+            treeViewModel: treeViewModel,
+            treeViewCell: { node in
+                TreeCell(
+                    treeCellViewModel: TreeCellViewModel(node: node),
+                    designLibrary: designLibrary)
+            }, goToDetail: { _ in }, designLibrary: designLibrary)
 
     }
 

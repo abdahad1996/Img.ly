@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 public enum LeafNodeEndpoint {
     case get(String)
     public func url(baseURL: URL) -> URL {

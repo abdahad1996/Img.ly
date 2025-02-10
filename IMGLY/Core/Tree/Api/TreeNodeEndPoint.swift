@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 public enum TreeNodeEndpoint {
     case get
 

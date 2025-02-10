@@ -5,34 +5,11 @@
 //  Created by macbook abdul on 24/03/2024.
 //
 
+import Core
 import Foundation
 import SwiftUI
-import Core
 
-//extension View {
-//    func viewDidLoad(_ action: @escaping () -> Void) -> some View {
-//        modifier(ViewDidLoadModifier(action: action))
-//    }
-//}
-//
-//private struct ViewDidLoadModifier: ViewModifier {
-//    private let action: () -> Void
-//    @State private var viewDidLoad = false
-//    
-//    init(action: @escaping () -> Void) {
-//        self.action = action
-//    }
-//    
-//    func body(content: Content) -> some View {
-//        content
-//            .onAppear {
-//                if viewDidLoad { return }
-//                viewDidLoad = true
-//                
-//                action()
-//            }
-//    }
-//}
+
 public struct TreeView<TreeViewCell: View>: View {
     let treeViewCell: (TreeNode) -> TreeViewCell
     let goToDetail: (String) -> Void
@@ -40,10 +17,11 @@ public struct TreeView<TreeViewCell: View>: View {
     @StateObject var treeViewModel: TreeViewModel
     @State private var isEditing = false
 
-    public init(treeViewModel: TreeViewModel,
-         treeViewCell: @escaping (TreeNode) -> TreeViewCell,
-         goToDetail: @escaping (String) -> Void,
-         designLibrary: DesignLibraryProvider
+    public init(
+        treeViewModel: TreeViewModel,
+        treeViewCell: @escaping (TreeNode) -> TreeViewCell,
+        goToDetail: @escaping (String) -> Void,
+        designLibrary: DesignLibraryProvider
     ) {
         self._treeViewModel = StateObject(wrappedValue: treeViewModel)
         self.treeViewCell = treeViewCell
@@ -55,7 +33,10 @@ public struct TreeView<TreeViewCell: View>: View {
         VStack {
             switch treeViewModel.state {
             case .idle:
-                RetryButton(text: "tap on the button to get data", designLibrary: designLibrary) {
+                RetryButton(
+                    text: "tap on the button to get data",
+                    designLibrary: designLibrary
+                ) {
                     Task {
                         await treeViewModel.load()
                     }
@@ -65,7 +46,8 @@ public struct TreeView<TreeViewCell: View>: View {
                 ProgressView().accessibilityIdentifier("ProgressView")
 
             case .failure(let error):
-                RetryButton(text: error.rawValue, designLibrary: designLibrary) {
+                RetryButton(text: error.rawValue, designLibrary: designLibrary)
+                {
                     Task {
                         await treeViewModel.load()
                     }
@@ -82,90 +64,102 @@ public struct TreeView<TreeViewCell: View>: View {
                                 if node.children == nil {
                                     goToDetail(node.id)
                                 }
-                               
-                            }.accessibilityIdentifier("UICellVertical\(node.id)")
-                    
+
+                            }.accessibilityIdentifier(
+                                "UICellVertical\(node.id)")
+
                     }
                     .onDelete(perform: treeViewModel.deleteNode)
                     .onMove(perform: treeViewModel.move)
                     .listRowSeparatorTint(designLibrary.color.text.standard)
                     .listRowBackground(Color.clear)
-                    
+
                 }.accessibilityIdentifier("list")
 
-        
-                .listRowInsets(.none)
-                .listStyle(PlainListStyle())
-                .environment(\.editMode, isEditing ? .constant(.active) : .constant(.inactive))
+                    .listRowInsets(.none)
+                    .listStyle(PlainListStyle())
+                    .environment(
+                        \.editMode,
+                        isEditing ? .constant(.active) : .constant(.inactive)
+                    )
 
-                .scrollContentBackground(.hidden)
-                .background(designLibrary.color.background.cell.edgesIgnoringSafeArea(.all))
-                .frame(maxWidth: .infinity)
-                .navigationBar(backgroundColor: designLibrary.color.background.cardDetails, titleColor: designLibrary.color.text.standard)
-                .navigationBarItems(trailing: editButton)
+                    .scrollContentBackground(.hidden)
+                    .background(
+                        designLibrary.color.background.cell
+                            .edgesIgnoringSafeArea(.all)
+                    )
+                    .frame(maxWidth: .infinity)
+                    .navigationBar(
+                        backgroundColor: designLibrary.color.background
+                            .cardDetails,
+                        titleColor: designLibrary.color.text.standard
+                    )
+                    .navigationBarItems(trailing: editButton)
             }
         }.accessibilityIdentifier("mainview")
-//        .viewDidLoad {
-//            Task{
-//                if treeViewModel.state == .idle {
-//                    await treeViewModel.load()
-//                }
-//            }
-//             
-//        }
+            //        .viewDidLoad {
+            //            Task{
+            //                if treeViewModel.state == .idle {
+            //                    await treeViewModel.load()
+            //                }
+            //            }
+            //
+            //        }
             .task {
                 if treeViewModel.state == .idle {
                     await treeViewModel.load()
                 }
             }
-        .refreshable {
-            await treeViewModel.load()
-        }
-//        .onAppear() {
-//            task{
-//                if treeViewModel.state == .idle {
-//                    await treeViewModel.load()
-//                }
-//            }
-//            
-//        }
-        
+            .refreshable {
+                await treeViewModel.load()
+            }
+        //        .onAppear() {
+        //            task{
+        //                if treeViewModel.state == .idle {
+        //                    await treeViewModel.load()
+        //                }
+        //            }
+        //
+        //        }
+
     }
-    
 
     @ViewBuilder var editButton: some View {
         Button(action: {
             withAnimation {
                 isEditing.toggle()
             }
-        }) { HStack {
-            Image("duck")
-                .renderingMode(.template)
-                .foregroundColor(designLibrary.color.icon.buttonPrimary)
+        }) {
+            HStack {
+                Image("duck")
+                    .renderingMode(.template)
+                    .foregroundColor(designLibrary.color.icon.buttonPrimary)
 
-            Text(isEditing ? "Done" : "Edit")
-                .foregroundColor(designLibrary.color.text.buttonPrimary)
-                .font(designLibrary.font.buttonFont.standard)
-        }
-        .frame(width: 80, height: 40)
-        .background(designLibrary.color.background.buttonPrimary)
-        .cornerRadius(designLibrary.miscellaneous.cornerRadius.button)
+                Text(isEditing ? "Done" : "Edit")
+                    .foregroundColor(designLibrary.color.text.buttonPrimary)
+                    .font(designLibrary.font.buttonFont.standard)
+            }
+            .frame(width: 80, height: 40)
+            .background(designLibrary.color.background.buttonPrimary)
+            .cornerRadius(designLibrary.miscellaneous.cornerRadius.button)
         }
     }
 
 }
 
-
-
 #Preview {
-    TreeView(treeViewModel: TreeViewModel(loader: StubLoader()), treeViewCell: { node in
-        TreeCell(treeCellViewModel: TreeCellViewModel(node: node), designLibrary: DesignLibrary())
-    }, goToDetail: {_ in}, designLibrary: DesignLibrary())
+    TreeView(
+        treeViewModel: TreeViewModel(loader: StubLoader()),
+        treeViewCell: { node in
+            TreeCell(
+                treeCellViewModel: TreeCellViewModel(node: node),
+                designLibrary: DesignLibrary())
+        }, goToDetail: { _ in }, designLibrary: DesignLibrary())
 }
 
-struct StubLoader:TreeNodeLoader{
+struct StubLoader: TreeNodeLoader {
     func load() async throws -> [TreeNode] {
         return StubbedReponses.buildTreeNodeHierarchy()
     }
-    
+
 }

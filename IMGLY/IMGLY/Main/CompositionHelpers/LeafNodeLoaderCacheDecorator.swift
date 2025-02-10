@@ -9,17 +9,20 @@ import Core
 import Foundation
 
 class LeafNodeLoaderCacheDecorator: LeafNodeLoader {
-  private let remoteLeafNodeLoader: RemoteLeafNodeLoader
-  private let leafNodeCache: LeafNodeCache
+    private let remoteLeafNodeLoader: RemoteLeafNodeLoader
+    private let leafNodeCache: LeafNodeCache
 
-  init(remoteLeafNodeLoader: RemoteLeafNodeLoader, leafNodeCache: any LeafNodeCache) {
-    self.remoteLeafNodeLoader = remoteLeafNodeLoader
-    self.leafNodeCache = leafNodeCache
-  }
+    init(
+        remoteLeafNodeLoader: RemoteLeafNodeLoader,
+        leafNodeCache: any LeafNodeCache
+    ) {
+        self.remoteLeafNodeLoader = remoteLeafNodeLoader
+        self.leafNodeCache = leafNodeCache
+    }
 
-  func load(id: String) async throws -> LeafNode {
-    let node = try await remoteLeafNodeLoader.load(id: id)
-    try? await leafNodeCache.save(id: id, node: node)
-    return node
-  }
+    func load(id: String) async throws -> LeafNode {
+        let node = try await remoteLeafNodeLoader.load(id: id)
+        try? await leafNodeCache.save(id: id, node: node)
+        return node
+    }
 }

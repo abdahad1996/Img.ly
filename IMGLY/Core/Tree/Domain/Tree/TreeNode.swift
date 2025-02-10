@@ -14,7 +14,10 @@ public struct TreeNode: Identifiable, Equatable {
     public var parentId: String?
     public var level: Int = 0
 
-    public init(id: String, label: String, children: [TreeNode]? = nil, parentId: String? = nil, level: Int = 0) {
+    public init(
+        id: String, label: String, children: [TreeNode]? = nil,
+        parentId: String? = nil, level: Int = 0
+    ) {
         self.id = id
         self.label = label
         self.children = children
